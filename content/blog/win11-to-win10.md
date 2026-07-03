@@ -3,6 +3,7 @@ title: Win11保留数据无损降级Win10！
 date: '2025-11-23'
 description: 我真的受够了Win11那黏黏的感觉了，什么？能降级？还是官方手段？还能保留数据？？?
 draft: false
+coverImage: /public/img/win11-to-win10-win11-to-win10.webp
 ---
 # 前言
 

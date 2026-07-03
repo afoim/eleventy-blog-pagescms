@@ -3,6 +3,7 @@ title: 崩坏星穹铁道全局加速
 date: '2025-04-14'
 description: 因为本文涉猎敏感地带，所以仅供专业人士技术讨论，我也不会发布什么一键包，请按照教程自己动手
 draft: false
+coverImage: /public/img/starrail-fast-36f34153-b96f-43ec-911e-8c3d65bc8aa0.webp
 ---
 
 # 原理剖析

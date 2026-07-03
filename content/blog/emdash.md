@@ -4,6 +4,7 @@ date: '2026-07-03'
 description: 昨晚看到有群U说什么能部署在CF的WordPress，我看看怎么个事！
 draft: false
 tags: []
+coverImage: /public/img/emdash-index.png
 ---
 # 这是什么？
 

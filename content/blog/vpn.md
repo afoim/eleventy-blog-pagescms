@@ -4,6 +4,7 @@ date: '2024-11-21'
 description: 不要再买机场了！自建它不香吗？!
 draft: false
 tags: []
+coverImage: /public/img/vpn-2024-11-21-08-24-54-image.webp
 ---
 # 将Cloudflare作为代理使用（Vless - EdgeTunnel）
 

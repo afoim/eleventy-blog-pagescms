@@ -4,6 +4,7 @@ date: '2026-04-11'
 description: 你有没有想过从0通过各种开源项目自己搭建一个CDN？今天就来教你！
 draft: false
 tags: []
+coverImage: /public/img/self-host-cdn-scdn.png
 ---
 # 前情提要
 

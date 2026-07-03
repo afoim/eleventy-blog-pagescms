@@ -3,6 +3,7 @@ title: 记录
 date: '1998-12-31'
 description: 一些记录，不定时更新
 draft: false
+coverImage: /public/img/record-record.png
 ---
 
 

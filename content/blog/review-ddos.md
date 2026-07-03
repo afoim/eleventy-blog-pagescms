@@ -4,6 +4,7 @@ date: '2026-02-10'
 description: 自25年11月至今，该网站被连续不断攻击了总计高达几百TiB，攻击峰值高达6.8Gbps，且攻击者从最开始的纯印度IP攻击到如今的纯中国大陆IP攻击。今天，就跟大家谈谈攻击者为什么要攻击，他们想得到什么，以及如何防范DDOS
 draft: false
 tags: []
+coverImage: /public/img/review-ddos-review-ddos-5.png
 ---
 
 # 引言

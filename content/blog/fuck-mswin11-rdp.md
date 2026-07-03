@@ -4,6 +4,7 @@ date: '2026-05-22'
 description: 今天手头突然要用一个老的Win7 32位系统来远程开发，自然是无法用UU远程了，然后RDP又给我整这出...
 draft: false
 tags: []
+coverImage: /public/img/fuck-mswin11-rdp-fkms.png
 ---
 # 症状
 

@@ -4,6 +4,7 @@ date: '2026-02-17'
 description: 如果你经常一觉醒来就看到一堆友链 PR，还得逐个检查格式、顺手帮对方修语法错误，那把这件事自动化确实会轻松很多。
 draft: false
 tags: []
+coverImage: /public/img/auto-pr-link-auto-pr-link-12.png
 ---
 
 # 起因

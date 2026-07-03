@@ -4,6 +4,7 @@ date: '2026-02-23'
 description: 你是否正在寻找一个密码库？又不想自托管？
 draft: false
 tags: []
+coverImage: /public/img/bitwarden-com-bitwarden.png
 ---
 
 # Bitwarden以及Bitwarden.com是什么

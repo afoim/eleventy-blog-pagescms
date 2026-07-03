@@ -3,6 +3,7 @@ title: Typora免付费激活
 date: '2025-08-14'
 description: Typora是一个简洁易用（？）的MarkDown编辑器，不想交钱？改几行文件就破解！
 draft: false
+coverImage: /public/img/hack-typora-2025-08-20-21-08-22-image.webp
 ---
 
 

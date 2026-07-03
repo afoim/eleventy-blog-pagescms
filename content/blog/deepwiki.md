@@ -4,6 +4,7 @@ date: '2026-02-11'
 description: 你是否在Github有一些脍炙人口的开源项目？快看看有没有被DeepWiki收录！获得免费！强大！易用！实时更新的知识库！
 draft: false
 tags: []
+coverImage: /public/img/deepwiki-deepwiki.png
 ---
 # 这是什么？
 

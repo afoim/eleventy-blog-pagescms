@@ -3,6 +3,7 @@ title: 人生中的第一台自己组装的台式！键盘亮显示器必亮！
 date: '2025-10-10'
 description: 很早就想装一个台式常驻家里了，这次阴差阳错的获得了一个机会，至于为什么我称它为阴差阳错，请看VCR
 draft: false
+coverImage: /public/img/first-pc-IMG20251010160613.webp
 ---
 
 # 前情提要

@@ -4,6 +4,7 @@ date: '2026-04-24'
 description: 自2024年以来，本站一直使用 Astro/Fuwari 来开发，但从该项目不再是一个纯粹的静态博客站之后，基于Astro的开发也越来越艰难。今天，我们来聊聊这次大更新吧！
 draft: false
 tags: []
+coverImage: /public/img/astro-to-svelte-svelte.png
 ---
 # 为什么要重构为纯Svelte？
 这实际上是个复杂的问题。在2024年选择Fuwari作为本站框架实际上只是一个巧合，当时并没有顾虑到后续开发的问题，我当时甚至是从 Hugo/PaperMod 这种明显比Astro高效的框架迁移过来的。当时选择Fuwari只有一个原因：**好看** 

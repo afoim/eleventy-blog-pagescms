@@ -3,6 +3,7 @@ title: 盘点那些好用的Serverless（云函数）！
 date: '2025-11-25'
 description: 你是否为了搭建一个网站而买了一台VPS，然后安装宝塔或1Panel再安装Nginx等等等等？现在这些统统不要！只需要稍加学习，你就可以得到一个免费的高可用的托管服务！
 draft: false
+coverImage: /public/img/serverless-function-serverless-function.webp
 ---
 
 # 何为Serverless

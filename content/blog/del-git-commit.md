@@ -4,6 +4,7 @@ date: '2026-01-23'
 description: 我们有时候可能会误操作导致提交了一个不该提交的文件，当你发现的时候，在此之后已经堆砌了很多新的提交...
 draft: false
 tags: []
+coverImage: /public/img/del-git-commit-del-git-commit-1.webp
 ---
 
 # 引言

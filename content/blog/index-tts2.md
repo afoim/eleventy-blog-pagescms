@@ -3,6 +3,7 @@ title: 手把手教你克隆音色！
 date: '2025-10-13'
 description: 仅需几秒的语音就能克隆音色，无需繁琐配置，一键启动！随时随地做蓝底神人小视频！
 draft: false
+coverImage: /public/img/index-tts2-index-tts2-4.webp
 ---
 
 # 正式开始

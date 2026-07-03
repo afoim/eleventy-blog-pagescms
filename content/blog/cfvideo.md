@@ -4,6 +4,7 @@ date: '2026-02-26'
 description: 你知道吗？Cloudflare上也是可以“原生”托管视频的！
 draft: false
 tags: []
+coverImage: /public/img/cfvideo-cfvideo.png
 ---
 # 引言
 

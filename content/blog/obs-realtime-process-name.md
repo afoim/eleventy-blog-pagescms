@@ -4,6 +4,7 @@ date: '2026-03-07'
 description: 通过持续监测当前前台进程和指定程序的窗口标题，并将结果写入 TXT 文件，就可以让 OBS 实时向观众展示你正在使用的软件或当前播放的内容。
 draft: false
 tags: []
+coverImage: /public/img/obs-realtime-process-name-OBS-RT-PC.png
 ---
 # 引言
 

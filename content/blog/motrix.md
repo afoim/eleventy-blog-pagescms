@@ -3,6 +3,7 @@ title: 浏览器自带下载慢？你需要一个第三方下载器 Motrix！
 date: '2025-05-25'
 description: 如果你觉得 Chromium 浏览器自带下载速度太慢，不妨试试免费开源、界面简洁且体验不错的第三方下载器 Motrix。
 draft: false
+coverImage: /public/img/motrix-ee0efba8-8c27-449f-86d0-3e9367d12463.webp
 ---
 
 

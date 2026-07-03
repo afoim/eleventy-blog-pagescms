@@ -4,6 +4,7 @@ date: '2026-02-23'
 description: 你是否正在运营一个脍炙人口的网站？手把手教你变现！
 draft: false
 tags: []
+coverImage: /public/img/google-adsense-google-adsense1.png
 ---
 
 # Google Adsense 是什么

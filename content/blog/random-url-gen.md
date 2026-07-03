@@ -4,6 +4,7 @@ date: '2025-12-29'
 description: 我曾于2024搭建了第一个随机图网站，最近几周又深度研究了类似项目，发现这类项目有很多坑也有很多神秘的捷径，并且某些架构还可以做到“永生”...
 draft: false
 tags: []
+coverImage: /public/img/random-url-gen-random-url-gen.webp
 ---
 
 # 探索架构

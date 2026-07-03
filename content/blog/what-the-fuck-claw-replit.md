@@ -4,6 +4,7 @@ date: '2026-04-05'
 description: 2026年4月6日，这天凌晨...神了...
 draft: false
 tags: []
+coverImage: /public/img/what-the-fuck-claw-replit-claude.png
 ---
 # 免费优质线路2c4g VPS + 免费GLM无限用
 

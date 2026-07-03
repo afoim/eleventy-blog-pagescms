@@ -4,6 +4,7 @@ date: '2026-02-02'
 description: 你是否在浏览或开发网站时在浏览器控制台看到过“由于跨域XXX，已阻止加载XXX”，或“200 Failed”状态？今天带你搞懂浏览器的跨域安全模型
 draft: false
 tags: []
+coverImage: /public/img/coxp-coxp.webp
 ---
 # 正式开始
 如果你做过网站（HTML），你就会知道，一个网页除了自身提供内容，如 `<p>hello world</p>` ，还可以 **内嵌外链资源** ，如 `<img src="https://othersite.com/hello.webp">`

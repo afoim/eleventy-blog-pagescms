@@ -4,6 +4,7 @@ date: '2026-04-03'
 description: 你可曾想过手搓一个基于邮件形式的文章订阅器？读者只需告诉系统邮箱，之后的文章更新都会发一封邮件来通知他们！
 draft: false
 tags: []
+coverImage: /public/img/email-posts-sub-email.png
 ---
 # 视频
 

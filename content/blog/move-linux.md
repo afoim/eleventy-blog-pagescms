@@ -4,6 +4,7 @@ date: '2026-06-12'
 description: 从旧硬盘迁移Linux到新硬盘，包括硬盘对拷、UUID修复、GRUB引导重建和fstab更新
 draft: false
 tags: []
+coverImage: /public/img/move-linux-cover7.png
 ---
 # 第一步：硬盘对拷
 

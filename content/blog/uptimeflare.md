@@ -4,6 +4,7 @@ date: '2026-01-02'
 description: 谁不想拥有一个监控自己服务的服务呢？
 draft: false
 tags: []
+coverImage: /public/img/uptimeflare-uptimeflare.webp
 ---
 # 从KV迁移
 由于原项目于26/1/3将数据存储从KV迁移到了D1，并且配备了完备的i18n，如果你仍在运营旧版的UptimeFlare，建议升级，下面是迁移教程

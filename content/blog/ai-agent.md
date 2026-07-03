@@ -4,6 +4,7 @@ date: '2026-03-05'
 description: 从实战角度对比 AI IDE 与 AI Agent，并演示如何用 ZCF 快速安装和配置 Codex。
 draft: false
 tags: []
+coverImage: /public/img/ai-agent-ai-agent.png
 ---
 # 引言
 

@@ -3,6 +3,7 @@ title: Fuwari静态博客搭建教程
 date: '2025-09-16'
 description: Fuwari 是一个静态博客框架，配合 Cloudflare Pages 可以快速搭建一个轻量、安全且易维护的个人博客
 draft: false
+coverImage: /public/img/fuwari-f286ef4d-326c-4c7c-8a1e-ed150937a12b.webp
 ---
 
 

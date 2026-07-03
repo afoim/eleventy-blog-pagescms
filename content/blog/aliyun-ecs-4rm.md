@@ -4,6 +4,7 @@ date: '2026-01-16'
 description: 通过创建抢占型实例+每月免费CDT 200G流量包，你几乎只需要付很少的硬盘费！
 draft: false
 tags: []
+coverImage: /public/img/aliyun-ecs-4rm-aliyun-ecs-4rm.webp
 ---
 # 正式开始
 > [!CAUTION]

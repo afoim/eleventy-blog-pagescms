@@ -4,6 +4,7 @@ date: '2026-01-16'
 description: EdgeOne和ESA都是非常好的免费国内CDN，常规用起来几乎一模一样，今天我们就来让他俩一决雌雄！
 draft: false
 tags: []
+coverImage: /public/img/eovsesa-eovsesa.webp
 ---
 
 # 前言

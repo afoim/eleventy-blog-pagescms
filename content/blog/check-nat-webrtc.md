@@ -4,6 +4,7 @@ date: '2026-04-04'
 description: 众所周知，NAT类型的检测并不是什么门槛，但是，如果我说纯浏览器也可以实现检测呢...
 draft: false
 tags: []
+coverImage: /public/img/check-nat-webrtc-nat.png
 ---
 # 视频（非教程）
 

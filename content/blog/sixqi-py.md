@@ -3,6 +3,7 @@ title: 我用Claude10分钟写了个六子棋...?
 date: '2025-07-13'
 description: 本来是不想写这种看起来就很简单的项目的，奈何群u苦苦哀求，只好实现
 draft: false
+coverImage: /public/img/sixqi-py-d359734c-1415-4ebc-8caf-4d807282fad6.webp
 ---
 
 

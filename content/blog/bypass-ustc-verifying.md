@@ -3,6 +3,7 @@ title: 绕过USTC的浏览器JS验证
 date: '2025-04-03'
 description: USTC在下载一些资源的时候会使用JS验证，有没有不用无头浏览器绕过的方法呢...
 draft: false
+coverImage: /public/img/bypass-ustc-verifying-58e8e41a-0755-4e6a-ab1e-a9dbaa1042d5.webp
 ---
 # 前言
 

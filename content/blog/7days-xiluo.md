@@ -4,6 +4,7 @@ date: '2026-06-28'
 description: 机密-001
 draft: false
 tags: []
+coverImage: /public/img/7days-xiluo-index.jpg
 ---
 # 开场白
 

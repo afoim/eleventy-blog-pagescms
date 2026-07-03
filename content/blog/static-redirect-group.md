@@ -4,6 +4,7 @@ date: '2026-01-14'
 description: 利用 Cloudflare Worker 和 GitHub，可以搭建一个纯静态、可自动维护的短链服务
 draft: false
 tags: []
+coverImage: /public/img/static-redirect-group-static-redirect-group.webp
 ---
 
 # 前言

@@ -3,6 +3,7 @@ title: 关于Rewrite MV无法播放\没有画面的解决方法
 date: '2024-11-27'
 description: Rewrite打完才发现MV一个没看到
 draft: false
+coverImage: /public/img/rewrite-qa-bafybeihhyuk3zjqkisf66swxft4j5srv3g7wozy3zn4ykpsh3cuveuuwb4.webp
 ---
 # 我使用的解决方法（Windows 10及以上带有Microsoft Store的系统）
 

@@ -3,6 +3,7 @@ title: N100 - PVE（fnOS+Debian）基建记录
 date: '2024-10-27'
 description: 在N100小主机上安装PVE，然后在其中安装飞牛NAS和Debian，实现追番建站分离，并且易扩展，易迁移
 draft: false
+coverImage: /public/img/n100-pve-N100-PVE_cover.webp
 ---
 
 # 配置&需求

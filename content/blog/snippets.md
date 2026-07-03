@@ -4,6 +4,7 @@ date: '2026-03-18'
 description: Snippets 是 Cloudflare 提供的不限量不计费的轻量Worker，我们可以拿她干不少有趣的业务！
 draft: false
 tags: []
+coverImage: /public/img/snippets-snippets-1.png
 ---
 # 你...买Cloudflare Pro了吗？
 

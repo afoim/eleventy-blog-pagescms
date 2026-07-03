@@ -4,6 +4,7 @@ date: '2026-06-05'
 description: 本文讲述了一个傻逼从丢失CF账号到放弃找回到创建新号被迫迁移关键数据以及最终将部分服务从Serverless迁移到Server，最后，天亮了
 draft: false
 tags: []
+coverImage: /public/img/wtfmycfaccountlostthe2xssisshabi-index.png
 ---
 # 静唠b瞌
 

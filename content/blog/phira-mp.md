@@ -3,6 +3,7 @@ title: Phira多人联机服务器搭建/使用教程
 date: '2024-11-05'
 description: 懒人可以直接下载预构建的可执行文件，但如果想获得日志需要自备Rust环境
 draft: false
+coverImage: /public/img/phira-mp-2024-11-06-08-20-39-image.webp
 ---
 
 # 直接下载服务端文件并运行

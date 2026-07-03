@@ -4,6 +4,7 @@ date: '2026-02-25'
 description: 大手来了，我说大手来了你尔朵隆吗
 draft: false
 tags: []
+coverImage: /public/img/jkw-jkw.png
 ---
 <video  
 data-dashjs-player  

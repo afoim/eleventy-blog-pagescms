@@ -4,6 +4,7 @@ date: '2026-01-17'
 description: 在几周前，我的网站累计被DDoS了约100TB的流量，哪怕我是静态网站，并不会被“打死”，但因为流量过大，还是被EdgeOne取消接入了，其实这件事本不会发生...
 draft: false
 tags: []
+coverImage: /public/img/waf-waf.webp
 ---
 # 静态网站能不能被打死？
 首先，先给结论：

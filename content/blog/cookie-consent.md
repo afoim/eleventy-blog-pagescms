@@ -4,6 +4,7 @@ date: '2026-01-30'
 description: Cookie Consent是一个开源简单实现的Cookie管理器，能让您的网站GDPR合规，仅需复制粘贴！
 draft: false
 tags: []
+coverImage: /public/img/cookie-consent-cookie-consent.webp
 ---
 # 前言
 你的网站是否有很多的跟踪器？如 **Google Analytics、Google Adsense、Microsoft Clarity、百度统计** 等等？

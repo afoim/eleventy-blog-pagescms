@@ -3,6 +3,7 @@ title: 认证为Folo的创作者
 date: '2025-08-10'
 description: Folo是一个RSS聚合平台，在上面不仅可以订阅很多优质的RSS源，也可以认领自己的RSS源
 draft: false
+coverImage: /public/img/folo-verification-2025-08-10-21-31-04-image.webp
 ---
 
 

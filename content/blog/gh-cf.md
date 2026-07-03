@@ -4,6 +4,7 @@ date: '2026-03-10'
 description: 巨简单！1分钟自建你的Github代理！
 draft: false
 tags: []
+coverImage: /public/img/gh-cf-cf-gh.png
 ---
 # 视频
 

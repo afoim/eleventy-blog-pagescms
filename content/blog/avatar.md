@@ -4,6 +4,7 @@ date: '2026-02-01'
 description: 今天突发奇想就像试试抓抓各大厂的头像接口，没想到有挺多根本没有防盗链
 draft: false
 tags: []
+coverImage: /public/img/avatar-avatar.webp
 ---
 
 

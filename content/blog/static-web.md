@@ -3,6 +3,7 @@ title: N款CDN/静态托管服务商的优缺点比较
 date: '2025-07-13'
 description: Serverless服务有很多，静态托管就是重中之重，来看看谁最稳定快速
 draft: false
+coverImage: /public/img/static-web-da8b7a38-7247-43af-b272-f012f2dd024d.webp
 ---
 
 

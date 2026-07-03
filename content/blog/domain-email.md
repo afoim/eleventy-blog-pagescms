@@ -3,6 +3,7 @@ title: 自建邮局太麻烦？两种免费域名邮箱方案任你选！
 date: '2025-03-11'
 description: 想要一个域名邮箱？这里提供两种免费方案：网易免费企业邮和腾讯企业邮箱，各有优劣，按需选择！
 draft: false
+coverImage: /public/img/domain-email-2025-05-02-21-04-48-image.webp
 ---
 
 

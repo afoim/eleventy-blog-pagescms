@@ -3,6 +3,7 @@ title: 卧室布局整改记录
 date: '2025-04-03'
 description: 起因只是凌晨苏醒的灵机一动，然后...
 draft: false
+coverImage: /public/img/reset-bedroom-37fc1d0b-533f-4905-a7ff-ab906fcb1860.webp
 ---
 
 # 前言

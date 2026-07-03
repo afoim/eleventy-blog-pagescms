@@ -4,6 +4,7 @@ date: '2026-01-19'
 description: 我们都知道，EdgeOne Pages有个完整的Node.js环境，那Umami是Next.js也基于Node.js，那我们是不是可以...
 draft: false
 tags: []
+coverImage: /public/img/eo-umami-eo-umami-1.webp
 ---
 
 # 原理探寻

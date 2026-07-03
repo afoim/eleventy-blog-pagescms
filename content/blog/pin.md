@@ -4,6 +4,7 @@ date: '2025-05-23'
 description: 关于如何联系二叉树树~
 draft: false
 tags: []
+coverImage: /public/img/pin-cute.webp
 ---
 
 

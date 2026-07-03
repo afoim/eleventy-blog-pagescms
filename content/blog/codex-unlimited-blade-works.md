@@ -4,6 +4,7 @@ date: '2026-03-06'
 description: 多的不说，仅做记录
 draft: false
 tags: []
+coverImage: /public/img/codex-unlimited-blade-works-codex.png
 ---
 # 原理
 

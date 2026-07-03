@@ -4,6 +4,7 @@ date: '2026-02-14'
 description: 你知道压缩炸弹吗？就是那种看着人畜无害小小的只有几kb的文件，但是解压后却有高达几十几百G的文件的神秘东西！
 draft: false
 tags: []
+coverImage: /public/img/web-bomb-web-bomb.png
 ---
 # 前言
 很早之前，我有一位朋友给我发了一个神秘的网站，打开以后就是一直转圈圈

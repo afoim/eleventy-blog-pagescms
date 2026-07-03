@@ -3,6 +3,7 @@ title: Github全站反向代理搭建指南
 date: '2025-04-14'
 description: 搭建Github全站代理的完整指南，涵盖原理讲解与多种部署方案（Cloudflare Worker、EdgeOne Pages、Vercel、VPS+Go）
 draft: false
+coverImage: /public/img/gh-proxy-8bb2d8ae-1703-44e8-9f3b-10b46ab69913.webp
 ---
 
 

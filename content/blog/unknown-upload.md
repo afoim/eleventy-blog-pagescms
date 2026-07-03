@@ -3,6 +3,7 @@ title: 自建一个匿名文件上传终结点
 date: '2025-11-08'
 description: 你有没有遇到过一种场景？在学校/公司电脑需要带一个文件走，但是又不想安装远程软件。那么今天，教你无需U盘，让你在任何地方将你想要的文件带回你家！
 draft: false
+coverImage: /public/img/unknown-upload-unknown-upload.webp
 ---
 # 视频
 https://www.bilibili.com/video/BV1Hz1DBZEov/

@@ -4,6 +4,7 @@ date: '2026-01-09'
 description: 你是否有一个短域名？没有也没关系，马上教你从域名开始搭建一个短链服务！
 draft: false
 tags: []
+coverImage: /public/img/shorter-url-shorter-url.webp
 ---
 
 # 视频

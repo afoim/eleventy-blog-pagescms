@@ -4,6 +4,7 @@ date: '2026-02-26'
 description: 你知道吗？其实Windows一直都在让NVMe硬盘以兼容模式跑！
 draft: false
 tags: []
+coverImage: /public/img/win11-native-nvme-win11-native-nvme.png
 ---
 # 前言
 

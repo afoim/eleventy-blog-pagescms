@@ -3,6 +3,7 @@ title: 魔法少女的魔女审判解包（Unity通用解包方案）
 date: '2025-10-05'
 description: 魔判这部作品真的很不错，大家可以去Steam搜索魔法少女的魔女审判下载下来玩玩
 draft: false
+coverImage: /public/img/manosaba-unzip-212792e5-8634-4121-984b-c3477f463897.webp
 ---
 
 # 正式开始
