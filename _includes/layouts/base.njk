@@ -52,21 +52,25 @@
 		const lbWrap = lb.querySelector('.lightbox-wrap');
 		let scale = 1, panX = 0, panY = 0, isPanning = false, startX, startY;
 
+		function imgSize() {
+			const r = lbImg.getBoundingClientRect();
+			return { w: r.width, h: r.height };
+		}
 		function clampPan() {
+			const { w, h } = imgSize();
 			const vw = lbWrap.clientWidth;
 			const vh = lbWrap.clientHeight;
-			const iw = lbImg.naturalWidth * scale;
-			const ih = lbImg.naturalHeight * scale;
-			if (iw <= vw) panX = 0;
-			if (ih <= vh) panY = 0;
-			const maxPanX = Math.max(0, (iw - vw) / 2);
-			const maxPanY = Math.max(0, (ih - vh) / 2);
+			if (w <= vw + 1) panX = 0;
+			if (h <= vh + 1) panY = 0;
+			const maxPanX = Math.max(0, (w - vw) / 2);
+			const maxPanY = Math.max(0, (h - vh) / 2);
 			panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
 			panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
 		}
 		function apply() { clampPan(); lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`; }
 		function canDrag() {
-			return (lbImg.naturalWidth * scale > lbWrap.clientWidth) || (lbImg.naturalHeight * scale > lbWrap.clientHeight);
+			const { w, h } = imgSize();
+			return w > lbWrap.clientWidth + 1 || h > lbWrap.clientHeight + 1;
 		}
 		function resetView() { scale = 1; panX = 0; panY = 0; apply(); }
 
