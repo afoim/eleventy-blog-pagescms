@@ -52,8 +52,21 @@
 		const lbWrap = lb.querySelector('.lightbox-wrap');
 		let scale = 1, panX = 0, panY = 0, isPanning = false, startX, startY;
 
-		function apply() {
-			lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`;
+		function clampPan() {
+			const vw = lbWrap.clientWidth;
+			const vh = lbWrap.clientHeight;
+			const iw = lbImg.naturalWidth * scale;
+			const ih = lbImg.naturalHeight * scale;
+			if (iw <= vw) panX = 0;
+			if (ih <= vh) panY = 0;
+			const maxPanX = Math.max(0, (iw - vw) / 2);
+			const maxPanY = Math.max(0, (ih - vh) / 2);
+			panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
+			panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
+		}
+		function apply() { clampPan(); lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`; }
+		function canDrag() {
+			return (lbImg.naturalWidth * scale > lbWrap.clientWidth) || (lbImg.naturalHeight * scale > lbWrap.clientHeight);
 		}
 		function resetView() { scale = 1; panX = 0; panY = 0; apply(); }
 
@@ -63,7 +76,8 @@
 			if (img.closest('.postlist-cover-link') || img.closest('.site-icon')) return;
 			lbImg.src = img.src;
 			lb.classList.add('active');
-			resetView();
+			if (lbImg.complete) resetView();
+			else lbImg.addEventListener('load', resetView, { once: true });
 		});
 
 		lb.addEventListener('click', e => {
@@ -77,13 +91,20 @@
 
 		lbWrap.addEventListener('wheel', e => {
 			e.preventDefault();
+			const rect = lbImg.getBoundingClientRect();
+			const mx = (e.clientX - rect.left) / rect.width;
+			const my = (e.clientY - rect.top) / rect.height;
 			const delta = e.deltaY > 0 ? 0.9 : 1.1;
-			scale = Math.max(0.5, Math.min(scale * delta, 20));
+			const ns = Math.max(0.5, Math.min(scale * delta, 20));
+			panX = mx * rect.width - mx * (rect.width * ns / scale) + panX;
+			panY = my * rect.height - my * (rect.height * ns / scale) + panY;
+			scale = ns;
 			apply();
 		}, { passive: false });
 
 		lbWrap.addEventListener('mousedown', e => {
 			if (e.button !== 0) return;
+			if (!canDrag()) return;
 			e.preventDefault();
 			isPanning = true; startX = e.clientX - panX; startY = e.clientY - panY;
 			lbWrap.style.cursor = 'grabbing';
@@ -94,7 +115,9 @@
 			lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`;
 		});
 		document.addEventListener('mouseup', () => {
+			if (!isPanning) return;
 			isPanning = false; lbWrap.style.cursor = 'grab';
+			apply();
 		});
 		lbWrap.addEventListener('dragstart', e => e.preventDefault());
 		{% endjs %}
