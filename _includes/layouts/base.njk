@@ -107,14 +107,33 @@
 			isPanning = false; lbWrap.style.cursor = 'grab';
 		});
 		lbWrap.addEventListener('dragstart', e => e.preventDefault());
+
 		// 外链自动 blank
-document.querySelectorAll('a[href^=http]').forEach(a => {
-	if (!a.href.includes(location.host)) {
-		a.target = '_blank';
-		a.rel = 'noopener';
-	}
-});
-{% endjs %}
+		document.querySelectorAll('a[href^=http]').forEach(a => {
+			if (!a.href.includes(location.host)) a.target = '_blank', a.rel = 'noopener';
+		});
+
+		// GFM 警报块 > [!tip|info|warning|caution]
+		document.querySelectorAll('blockquote').forEach(bq => {
+			const p = bq.querySelector('p:first-child');
+			if (!p) return;
+			const text = p.textContent.trim();
+			const types = [
+				{ key: 'tip', emoji: '💡', label: '提示' },
+				{ key: 'info', emoji: '📖', label: '信息' },
+				{ key: 'warning', emoji: '⚠️', label: '注意' },
+				{ key: 'caution', emoji: '🚨', label: '警告' }
+			];
+			for (const t of types) {
+				if (new RegExp('^\\[' + t.key + '\\]', 'i').test(text)) {
+					bq.dataset.alert = '';
+					bq.dataset['alert' + t.key.charAt(0).toUpperCase() + t.key.slice(1)] = '';
+					p.innerHTML = p.innerHTML.replace(new RegExp('^\\[' + t.key + '\\]', 'i'), t.emoji + ' ' + t.label);
+					break;
+				}
+			}
+		});
+		{% endjs %}
 		<script>{% getBundle "js" %}</script>
 	</body>
 </html>

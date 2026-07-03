@@ -109,6 +109,32 @@ blockquote p:last-child {
 blockquote p:first-child {
 	margin-top: 0;
 }
+blockquote[data-alert] {
+	padding: 0.5em 1em 0.5em 0.75em;
+	border-left-width: 4px;
+	display: flow-root;
+}
+blockquote[data-alert] p:first-child {
+	margin-top: 0.5em;
+}
+blockquote[data-alert-tip] {
+	border-left-color: #22c55e;
+	background: #1a2d1e;
+}
+blockquote[data-alert-info] {
+	border-left-color: #3b82f6;
+	background: #1a253d;
+}
+blockquote[data-alert-warning] {
+	border-left-color: #eab308;
+	background: #2a2518;
+}
+blockquote[data-alert-caution] {
+	border-left-color: #ef4444;
+	background: #2d1a1a;
+}
+	margin-top: 0;
+}
 
 .giscus {
 	margin-top: 2em;
