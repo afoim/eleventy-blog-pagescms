@@ -243,16 +243,18 @@ header {
 }
 
 .postlist-link-pin {
-	background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #ff6b6b) 0% / 200%;
+	display: inline-block;
+	color: transparent !important;
+	background-image: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #ff6b6b);
+	background-size: 200% 100%;
+	background-position: 0% 50%;
 	-webkit-background-clip: text;
 	background-clip: text;
-	-webkit-text-fill-color: transparent;
-	color: transparent;
 	animation: pinShine 2s linear infinite;
 }
 @keyframes pinShine {
-	0% { background-position: 0% center; }
-	100% { background-position: 100% center; }
+	0% { background-position: 0% 50%; }
+	100% { background-position: 100% 50%; }
 }
 
 .post-tag {
