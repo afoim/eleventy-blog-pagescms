@@ -1,4 +1,15 @@
 media: public/img
+
+actions:
+  - name: deploy
+    label: Deploy to Cloudflare
+    workflow: deploy.yml
+    ref: main
+    confirm:
+      title: Deploy to Cloudflare Pages?
+      message: This will build the site and deploy it to Cloudflare Pages.
+      button: Deploy
+
 content:
   - name: posts
     label: Posts
