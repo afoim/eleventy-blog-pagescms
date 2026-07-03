@@ -55,7 +55,15 @@
 		function apply() {
 			lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`;
 		}
-		function resetView() { scale = 1; panX = 0; panY = 0; apply(); }
+		function resetView() {
+			const nw = lbImg.naturalWidth, nh = lbImg.naturalHeight;
+			if (nw && nh) {
+				const vw = lbWrap.clientWidth, vh = lbWrap.clientHeight;
+				scale = Math.min(vw / nw, vh / nh);
+			} else { scale = 1; }
+			panX = 0; panY = 0;
+			apply();
+		}
 
 		document.querySelector('main').addEventListener('click', e => {
 			const img = e.target.closest('img');
