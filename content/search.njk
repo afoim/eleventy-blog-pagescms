@@ -27,16 +27,30 @@ permalink: /search/
 	margin-bottom: 1em;
 }
 .search-result {
+	display: flex;
+	gap: 1em;
+	align-items: flex-start;
 	padding: 0.8em 0;
 	border-bottom: 1px solid #2a3a4e;
 }
 .search-result:last-child {
 	border-bottom: none;
 }
+.search-result-cover {
+	width: 80px;
+	height: 60px;
+	object-fit: cover;
+	border-radius: 4px;
+	flex-shrink: 0;
+}
+.search-result-body {
+	flex: 1;
+	min-width: 0;
+}
 .search-result-title {
 	font-size: 1.1em;
 	font-weight: 700;
-	margin-bottom: 0.3em;
+	margin-bottom: 0.2em;
 }
 .search-result-title a {
 	color: var(--text-color-link);
@@ -48,14 +62,13 @@ permalink: /search/
 .search-result-desc {
 	font-size: 0.9em;
 	color: var(--color-gray-90);
-	line-height: 1.5;
+	line-height: 1.4;
+	margin-bottom: 0.2em;
 }
-.search-result-desc em {
-	font-style: normal;
-	background: #b8860b33;
+.search-result-matches {
+	font-size: 0.82em;
 	color: #ffd700;
-	padding: 0 2px;
-	border-radius: 2px;
+	font-weight: 700;
 }
 .search-empty {
 	color: #888;
@@ -75,25 +88,13 @@ const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
 const searchInfo = document.getElementById('searchInfo');
 
-// 清除HTML标签
 function stripHTML(html) {
 	const d = document.createElement('div');
 	d.innerHTML = html;
 	return d.textContent || d.innerText || '';
 }
 
-// 高亮关键词
-function highlight(text, terms) {
-	let result = text;
-	for (const term of terms) {
-		const re = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-		result = result.replace(re, m => `<em>${m}</em>`);
-	}
-	return result;
-}
-
 let feedData = [];
-let searchWorker = null;
 
 async function loadFeed() {
 	try {
@@ -106,13 +107,26 @@ async function loadFeed() {
 		entries.forEach(entry => {
 			const title = entry.querySelector('title')?.textContent || '';
 			const link = entry.querySelector('link')?.getAttribute('href') || '';
+			const desc = entry.querySelector('description')?.textContent || '';
+			const coverEl = entry.querySelector('coverimage');
+			const cover = coverEl?.textContent || '';
 			const content = stripHTML(entry.querySelector('content')?.textContent || '');
-			feedData.push({ title, link, content });
+			feedData.push({ title, link, desc, cover, content });
 		});
 		searchInfo.textContent = `已索引 ${feedData.length} 篇文章`;
 	} catch (e) {
 		searchInfo.textContent = '无法加载搜索索引';
 	}
+}
+
+function countMatches(text, terms) {
+	let count = 0;
+	for (const term of terms) {
+		const re = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+		const matches = text.match(re);
+		if (matches) count += matches.length;
+	}
+	return count;
 }
 
 function doSearch() {
@@ -126,22 +140,14 @@ function doSearch() {
 	const terms = query.split(/\s+/).filter(Boolean);
 	const results = feedData
 		.map(item => {
-			let score = 0;
-			let titleMatch = item.title;
-			let contentMatch = item.content;
-			for (const term of terms) {
-				const re = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
-				const tMatch = item.title.match(re);
-				const cMatch = item.content.match(re);
-				if (tMatch) score += tMatch.length * 3;
-				if (cMatch) score += cMatch.length;
-			}
-			titleMatch = highlight(item.title, terms);
-			contentMatch = highlight(item.content.slice(0, 300), terms);
-			return { ...item, score, titleMatch, contentMatch };
+			const titleMatches = countMatches(item.title, terms);
+			const descMatches = countMatches(item.desc, terms);
+			const contentMatches = countMatches(item.content, terms);
+			const total = titleMatches + descMatches + contentMatches;
+			return { ...item, total, titleMatches, descMatches, contentMatches };
 		})
-		.filter(item => item.score > 0)
-		.sort((a, b) => b.score - a.score);
+		.filter(item => item.total > 0)
+		.sort((a, b) => b.total - a.total);
 
 	if (results.length === 0) {
 		searchResults.innerHTML = '<p class="search-empty">没有找到匹配的结果</p>';
@@ -151,15 +157,18 @@ function doSearch() {
 
 	searchResults.innerHTML = results.map(item => `
 		<div class="search-result">
-			<div class="search-result-title"><a href="${item.link}">${item.titleMatch}</a></div>
-			<div class="search-result-desc">${item.contentMatch}${item.content.length > 300 ? '…' : ''}</div>
+			${item.cover ? `<img src="${item.cover}" alt="" class="search-result-cover" loading="lazy">` : ''}
+			<div class="search-result-body">
+				<div class="search-result-title"><a href="${item.link}">${item.title}</a></div>
+				${item.desc ? `<div class="search-result-desc">${item.desc}</div>` : ''}
+				<div class="search-result-matches">${item.total} 个匹配</div>
+			</div>
 		</div>
 	`).join('');
 
 	searchInfo.textContent = `共 ${results.length} 条结果（已索引 ${feedData.length} 篇）`;
 }
 
-// 防抖
 let debounceTimer;
 searchInput.addEventListener('input', () => {
 	clearTimeout(debounceTimer);
