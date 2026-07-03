@@ -61,7 +61,8 @@
 				const vw = lbWrap.clientWidth, vh = lbWrap.clientHeight;
 				scale = Math.min(vw / nw, vh / nh);
 			} else { scale = 1; }
-			panX = 0; panY = 0;
+			panX = (lbWrap.clientWidth - lbImg.naturalWidth * scale) / 2;
+			panY = (lbWrap.clientHeight - lbImg.naturalHeight * scale) / 2;
 			apply();
 		}
 
@@ -86,13 +87,9 @@
 
 		lbWrap.addEventListener('wheel', e => {
 			e.preventDefault();
-			const rect = lbImg.getBoundingClientRect();
-			const mx = (e.clientX - rect.left) / rect.width;
-			const my = (e.clientY - rect.top) / rect.height;
-			const delta = e.deltaY > 0 ? 0.9 : 1.1;
-			const ns = Math.max(0.5, Math.min(scale * delta, 20));
-			panX = mx * rect.width - mx * (rect.width * ns / scale) + panX;
-			panY = my * rect.height - my * (rect.height * ns / scale) + panY;
+			const ns = Math.max(0.5, Math.min(scale * (e.deltaY > 0 ? 0.9 : 1.1), 20));
+			panX = e.clientX - (e.clientX - panX) * ns / scale;
+			panY = e.clientY - (e.clientY - panY) * ns / scale;
 			scale = ns;
 			apply();
 		}, { passive: false });

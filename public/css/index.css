@@ -379,6 +379,7 @@ h2 + .header-anchor {
 	overflow: hidden;
 }
 .lightbox-img {
+ttransform-origin: 0 0;
 	border-radius: 4px;
 	user-select: none;
 	-webkit-user-drag: none;
