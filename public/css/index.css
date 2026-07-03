@@ -221,6 +221,13 @@ header {
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 }
+.postlist-pin {
+	display: inline-block;
+	font-size: 0.75em;
+	color: #d97706;
+	margin-left: 0.5em;
+	font-weight: 600;
+}
 .postlist-date {
 	font-size: 0.8125em;
 	color: var(--color-gray-90);
