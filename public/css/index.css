@@ -383,7 +383,6 @@ h2 + .header-anchor {
 	max-height: 100%;
 	object-fit: contain;
 	border-radius: 4px;
-	transition: transform 0.05s;
 	user-select: none;
 	-webkit-user-drag: none;
 	pointer-events: none;

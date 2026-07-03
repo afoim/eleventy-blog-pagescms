@@ -52,10 +52,10 @@
 		const lbWrap = lb.querySelector('.lightbox-wrap');
 		let scale = 1, panX = 0, panY = 0, isPanning = false, startX, startY;
 
-		function resetView() { scale = 1; panX = 0; panY = 0; apply(); }
 		function apply() {
 			lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`;
 		}
+		function resetView() { scale = 1; panX = 0; panY = 0; apply(); }
 
 		document.querySelector('main').addEventListener('click', e => {
 			const img = e.target.closest('img');
@@ -70,6 +70,10 @@
 			if (e.target === lb || e.target === lbImg) lb.classList.remove('active');
 		});
 		lb.querySelector('.lightbox-close').addEventListener('click', () => lb.classList.remove('active'));
+		document.addEventListener('keydown', e => {
+			if (e.key === 'Escape') lb.classList.remove('active');
+			if (e.key === 'r' || e.key === 'R') resetView();
+		});
 
 		lbWrap.addEventListener('wheel', e => {
 			e.preventDefault();
@@ -80,21 +84,19 @@
 
 		lbWrap.addEventListener('mousedown', e => {
 			if (e.button !== 0) return;
+			e.preventDefault();
 			isPanning = true; startX = e.clientX - panX; startY = e.clientY - panY;
 			lbWrap.style.cursor = 'grabbing';
 		});
 		document.addEventListener('mousemove', e => {
 			if (!isPanning) return;
-			panX = e.clientX - startX; panY = e.clientY - startY; apply();
+			panX = e.clientX - startX; panY = e.clientY - startY;
+			lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`;
 		});
 		document.addEventListener('mouseup', () => {
 			isPanning = false; lbWrap.style.cursor = 'grab';
 		});
-
-		document.addEventListener('keydown', e => {
-			if (e.key === 'Escape') lb.classList.remove('active');
-			if (e.key === 'r' || e.key === 'R') resetView();
-		});
+		lbWrap.addEventListener('dragstart', e => e.preventDefault());
 		{% endjs %}
 		<script>{% getBundle "js" %}</script>
 	</body>
