@@ -4,11 +4,11 @@ layout: layouts/base.njk
 <h1>{{ title }}</h1>
 
 {%- if description %}
-<p class="post-description">{{ description }}</p>
+<blockquote class="post-description">{{ description }}</blockquote>
 {%- endif %}
 
 <ul class="post-metadata">
-	<li><time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
+	<li>📅 <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time></li>
 	{%- for tag in tags | filterTagList %}
 	{%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
 	<li><a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>{%- if not loop.last %}, {% endif %}</li>

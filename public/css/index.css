@@ -254,10 +254,20 @@ header {
 }
 
 .post-description {
-	font-size: 1em;
+	font-size: 0.95em;
 	color: var(--color-gray-90);
-	margin: 0 0 1em;
-	line-height: 1.5;
+	margin: 0.5em 0 1em;
+	line-height: 1.6;
+	padding: 0.75em 1em;
+	border-left: 3px solid var(--text-color-link);
+	background: #1a2d42;
+	border-radius: 0 6px 6px 0;
+}
+.post-description p:first-child {
+	margin-top: 0;
+}
+.post-description p:last-child {
+	margin-bottom: 0;
 }
 
 .post-metadata {
