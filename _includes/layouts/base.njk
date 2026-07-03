@@ -100,21 +100,6 @@
 			if (!a.href.includes(location.host)) a.target = '_blank', a.rel = 'noopener';
 		});
 
-		// GFM 警报块 > [!tip|info|warning|caution]
-		const ALERTS = { tip:['💡','提示'], info:['📖','信息'], warning:['⚠️','注意'], caution:['🚨','警告'] };
-		document.querySelectorAll('blockquote').forEach(bq => {
-			const p = bq.querySelector('p:first-child');
-			if (!p) return;
-			const txt = p.textContent.trim();
-			for (const key in ALERTS) {
-				if (new RegExp('^\\[' + key + '\\]', 'i').test(txt)) {
-					bq.setAttribute('data-alert', '');
-					bq.setAttribute('data-alert-' + key, '');
-					p.innerHTML = p.innerHTML.replace(new RegExp('^\\[' + key + '\\]', 'i'), ALERTS[key][0] + ' ' + ALERTS[key][1]);
-					break;
-				}
-			}
-		});
 		{% endjs %}
 		<script>{% getBundle "js" %}</script>
 	</body>
