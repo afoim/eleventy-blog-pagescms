@@ -1,7 +1,7 @@
----
+﻿---
 layout: layouts/base.njk
 eleventyNavigation:
-  key: 搜索
+  key: 鎼滅储
   order: 4
 permalink: /search/
 ---
@@ -77,9 +77,9 @@ permalink: /search/
 }
 </style>
 
-<h1>搜索</h1>
+<h1>鎼滅储</h1>
 
-<input type="search" class="search-box" id="searchInput" placeholder="输入关键词搜索…" autofocus>
+<input type="search" class="search-box" id="searchInput" placeholder="杈撳叆鍏抽敭璇嶆悳绱⑩€? autofocus>
 <p class="search-info" id="searchInfo"></p>
 <div id="searchResults"></div>
 
@@ -106,16 +106,16 @@ async function loadFeed() {
 		feedData = [];
 		entries.forEach(entry => {
 			const title = entry.querySelector('title')?.textContent || '';
-			const link = entry.querySelector('link')?.getAttribute('href') || '';
+			const link = (() => { try { return new URL(entry.querySelector('link')?.getAttribute('href') || '', location.origin).pathname; } catch(e) { return ''; } })();
 			const desc = entry.querySelector('description')?.textContent || '';
 			const coverEl = entry.querySelector('coverimage');
 			const cover = coverEl?.textContent || '';
 			const content = stripHTML(entry.querySelector('content')?.textContent || '');
 			feedData.push({ title, link, desc, cover, content });
 		});
-		searchInfo.textContent = `已索引 ${feedData.length} 篇文章`;
+		searchInfo.textContent = `宸茬储寮?${feedData.length} 绡囨枃绔燻;
 	} catch (e) {
-		searchInfo.textContent = '无法加载搜索索引';
+		searchInfo.textContent = '鏃犳硶鍔犺浇鎼滅储绱㈠紩';
 	}
 }
 
@@ -133,7 +133,7 @@ function doSearch() {
 	const query = searchInput.value.trim();
 	if (!query) {
 		searchResults.innerHTML = '';
-		searchInfo.textContent = `已索引 ${feedData.length} 篇文章`;
+		searchInfo.textContent = `宸茬储寮?${feedData.length} 绡囨枃绔燻;
 		return;
 	}
 
@@ -150,8 +150,8 @@ function doSearch() {
 		.sort((a, b) => b.total - a.total);
 
 	if (results.length === 0) {
-		searchResults.innerHTML = '<p class="search-empty">没有找到匹配的结果</p>';
-		searchInfo.textContent = `共 0 条结果（已索引 ${feedData.length} 篇）`;
+		searchResults.innerHTML = '<p class="search-empty">娌℃湁鎵惧埌鍖归厤鐨勭粨鏋?/p>';
+		searchInfo.textContent = `鍏?0 鏉＄粨鏋滐紙宸茬储寮?${feedData.length} 绡囷級`;
 		return;
 	}
 
@@ -161,12 +161,12 @@ function doSearch() {
 			<div class="search-result-body">
 				<div class="search-result-title"><a href="${item.link}">${item.title}</a></div>
 				${item.desc ? `<div class="search-result-desc">${item.desc}</div>` : ''}
-				<div class="search-result-matches">${item.total} 个匹配</div>
+				<div class="search-result-matches">${item.total} 涓尮閰?/div>
 			</div>
 		</div>
 	`).join('');
 
-	searchInfo.textContent = `共 ${results.length} 条结果（已索引 ${feedData.length} 篇）`;
+	searchInfo.textContent = `鍏?${results.length} 鏉＄粨鏋滐紙宸茬储寮?${feedData.length} 绡囷級`;
 }
 
 let debounceTimer;
@@ -178,3 +178,4 @@ searchInput.addEventListener('input', () => {
 loadFeed();
 {% endjs %}
 <script>{% getBundle "js" %}</script>
+
