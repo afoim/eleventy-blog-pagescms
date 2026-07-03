@@ -2,8 +2,8 @@
 title: 加群向导
 date: '2025-05-23'
 description: 关于如何联系二叉树树~
+pin: true
 draft: false
-tags: []
 coverImage: /public/img/pin-cute.webp
 ---
 
