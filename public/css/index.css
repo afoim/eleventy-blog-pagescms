@@ -57,6 +57,8 @@ li {
 
 a[href] {
 	color: var(--text-color-link);
+	overflow-wrap: break-word;
+	word-break: break-word;
 }
 a[href]:visited {
 	color: var(--text-color-link-visited);
