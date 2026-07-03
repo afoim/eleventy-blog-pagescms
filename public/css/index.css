@@ -113,10 +113,26 @@ blockquote p:first-child {
 
 table {
 	margin: 1em 0;
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.95em;
 }
-table td,
+table th,
+table td {
+	padding: 0.6em 0.8em;
+	text-align: left;
+	border: 1px solid #2a3a4e;
+}
 table th {
-	padding-right: 1em;
+	background: #1e3044;
+	color: #ffd700;
+	font-weight: 600;
+}
+table tr:nth-child(even) {
+	background: #1a2a3d;
+}
+table tr:hover {
+	background: #223550;
 }
 
 pre,
