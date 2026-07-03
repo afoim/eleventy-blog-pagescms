@@ -7,12 +7,12 @@ coverImage: /public/img/cf-fastip-cf-fastip-11.webp
 ---
 # 相关视频：
 - **全解**： <https://www.bilibili.com/video/BV1QpSoBqERj>
-- ~~SaaS原理：`https://www.bilibili.com/video/BV1A5rpBqENh/`~~
-- ~~Worker/Pages优选：`https://www.bilibili.com/video/BV1KNmtB6EU7/`~~
-- ~~R2优选：`https://www.bilibili.com/video/BV115KLzSEiv/`~~
-- ~~Tunnel优选：`https://www.bilibili.com/video/BV1WGMAznEBd/`~~
-- ~~自建优选：`https://www.bilibili.com/video/BV1H38vzoEcq/`
-  `https://www.bilibili.com/video/BV1zpgBz7EHK/`~~
+- ~~SaaS原理：<https://www.bilibili.com/video/BV1A5rpBqENh/>~~
+- ~~Worker/Pages优选：<https://www.bilibili.com/video/BV1KNmtB6EU7/>~~
+- ~~R2优选：<https://www.bilibili.com/video/BV115KLzSEiv/>~~
+- ~~Tunnel优选：<https://www.bilibili.com/video/BV1WGMAznEBd/>~~
+- ~~自建优选：<https://www.bilibili.com/video/BV1H38vzoEcq/>
+  <https://www.bilibili.com/video/BV1zpgBz7EHK/>~~
 
 > [!tip]
 > 所有优选一个域名即可，无需两个域名。如： `s.2x.nz` 和 `s-s.2x.nz` 即可完成优选
