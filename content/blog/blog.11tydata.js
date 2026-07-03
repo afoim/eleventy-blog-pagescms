@@ -6,7 +6,7 @@ module.exports = {
 	eleventyComputed: {
 		permalink: data => {
 			// 用文件名作为 URL slug
-			return `/blog/${data.page.fileSlug}/`;
+			return `/posts/${data.page.fileSlug}/`;
 		}
 	}
 };
