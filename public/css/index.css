@@ -244,10 +244,13 @@ header {
 
 .postlist-link-pin {
 	display: inline-block;
-	color: transparent !important;
-	background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff) 0% / 300% 100%;
+	color: #4d96ff !important;
+	background-image: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff);
+	background-size: 300% 100%;
+	background-position: 0% 50%;
 	-webkit-background-clip: text;
 	background-clip: text;
+	-webkit-text-fill-color: transparent;
 	animation: pinShine 3s ease-in-out infinite;
 }
 @keyframes pinShine {
