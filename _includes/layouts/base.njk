@@ -52,25 +52,8 @@
 		const lbWrap = lb.querySelector('.lightbox-wrap');
 		let scale = 1, panX = 0, panY = 0, isPanning = false, startX, startY;
 
-		function imgSize() {
-			const r = lbImg.getBoundingClientRect();
-			return { w: r.width, h: r.height };
-		}
-		function clampPan() {
-			const { w, h } = imgSize();
-			const vw = lbWrap.clientWidth;
-			const vh = lbWrap.clientHeight;
-			if (w <= vw + 1) panX = 0;
-			if (h <= vh + 1) panY = 0;
-			const maxPanX = Math.max(0, (w - vw) / 2);
-			const maxPanY = Math.max(0, (h - vh) / 2);
-			panX = Math.max(-maxPanX, Math.min(maxPanX, panX));
-			panY = Math.max(-maxPanY, Math.min(maxPanY, panY));
-		}
-		function apply() { clampPan(); lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`; }
-		function canDrag() {
-			const { w, h } = imgSize();
-			return w > lbWrap.clientWidth + 1 || h > lbWrap.clientHeight + 1;
+		function apply() {
+			lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`;
 		}
 		function resetView() { scale = 1; panX = 0; panY = 0; apply(); }
 
@@ -108,7 +91,6 @@
 
 		lbWrap.addEventListener('mousedown', e => {
 			if (e.button !== 0) return;
-			if (!canDrag()) return;
 			e.preventDefault();
 			isPanning = true; startX = e.clientX - panX; startY = e.clientY - panY;
 			lbWrap.style.cursor = 'grabbing';
@@ -119,9 +101,7 @@
 			lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`;
 		});
 		document.addEventListener('mouseup', () => {
-			if (!isPanning) return;
 			isPanning = false; lbWrap.style.cursor = 'grab';
-			apply();
 		});
 		lbWrap.addEventListener('dragstart', e => e.preventDefault());
 		{% endjs %}
