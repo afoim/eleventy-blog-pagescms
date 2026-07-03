@@ -1,0 +1,7 @@
+{
+	"name": "acofork-feed",
+	"compatibility_date": "2025-07-01",
+	"assets": {
+		"directory": "_site"
+	}
+}
