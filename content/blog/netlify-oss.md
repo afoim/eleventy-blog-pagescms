@@ -3,8 +3,6 @@ title: 有自己的开源项目？来申请Netlify的Open Source计划！
 date: '2025-08-08'
 description: "昨天在乱翻Netlify的网站，突然发现了一个开源计划的申请入口，故申请，没想到今天就通过了\U0001F60B"
 draft: false
-tags:
-  - Netlify
 ---
 
 

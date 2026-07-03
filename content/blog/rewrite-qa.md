@@ -3,8 +3,6 @@ title: 关于Rewrite MV无法播放\没有画面的解决方法
 date: '2024-11-27'
 description: Rewrite打完才发现MV一个没看到
 draft: false
-tags:
-  - Rewrite
 ---
 # 我使用的解决方法（Windows 10及以上带有Microsoft Store的系统）
 

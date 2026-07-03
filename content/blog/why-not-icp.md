@@ -3,8 +3,6 @@ title: 关于本站为什么不进行ICP备案
 date: '2025-07-28'
 description: 由于诸多原因，本站并未进行ICP备案，这里记录了一些原因
 draft: false
-tags:
-  - ICP
 ---
 > ~~目前已备案，该文章存档~~  被DDOS大肘子打回CF了
 # 违规内容

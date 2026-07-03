@@ -3,9 +3,6 @@ title: AI写不出优质的代码？其实是你引导错了！
 date: '2025-06-16'
 description: 如今，大语言模型百花齐放，有开山鼻祖OpenAI的ChatGPT系列，也有Anthropic开发的代码神器Claude系列。但是，哪怕模型再先进再聪明，如果用它的人使用的方法不对，那再好的模型用起来也是笨笨的
 draft: false
-tags:
-  - AI
-  - Prompt
 ---
 > 视频链接： https://www.bilibili.com/video/BV1jw38z9EEn/
 # 正确的引导方法

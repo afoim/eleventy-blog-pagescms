@@ -3,8 +3,6 @@ title: 关于Whois查询那点事
 date: '2025-05-27'
 description: 你有没想过自己部署一个第三方的Whois查询服务？我做过，这里面全是坑！
 draft: false
-tags:
-  - Whois
 ---
 # 前言
 

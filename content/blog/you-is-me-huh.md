@@ -3,8 +3,6 @@ title: 你是我吗？
 date: '2025-08-12'
 description: "博客开源了就会有很多小笨蛋Fork完改也改不全，导致评论也评论到我这来了，浏览量统计也来我这来了\U0001F605"
 draft: false
-tags:
-  - CORS
 ---
 # 前情提要
 

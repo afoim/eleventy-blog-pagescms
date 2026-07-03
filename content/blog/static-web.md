@@ -3,13 +3,6 @@ title: N款CDN/静态托管服务商的优缺点比较
 date: '2025-07-13'
 description: Serverless服务有很多，静态托管就是重中之重，来看看谁最稳定快速
 draft: false
-tags:
-  - Vercel
-  - Cloudflare
-  - Netlify
-  - EdgeOne
-  - Github
-  - Render
 ---
 
 

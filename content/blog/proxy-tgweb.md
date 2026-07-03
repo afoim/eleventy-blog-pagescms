@@ -3,9 +3,6 @@ title: 大陆直连TG Web？触手可及！
 date: '2025-08-01'
 description: TG Web采用前后端分离，前端可以部署到静态托管平台，而后端可以用各种服务反代
 draft: false
-tags:
-  - Telegram Web
-  - 反向代理
 ---
 
 

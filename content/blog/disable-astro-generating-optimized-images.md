@@ -3,8 +3,6 @@ title: 禁用Astro跟弱智一般的静态构建图像优化
 date: '2025-09-09'
 description: 折腾了整整一天，终于解决了这傻逼Astro对于静态构建自作聪明的图片优化了，这不仅能提高构建速度，还可以减少无谓的CPU资源消耗，更环保，也更符合Unix哲学
 draft: false
-tags:
-  - Astro
 ---
 
 

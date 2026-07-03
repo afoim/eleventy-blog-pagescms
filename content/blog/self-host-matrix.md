@@ -3,9 +3,6 @@ title: QQ微信不够私密？自建自己的聊天服务器！
 date: '2025-08-01'
 description: 通过自建Synapse，用户可以通过Element等软件来直接在你的服务器上聊天
 draft: false
-tags:
-  - Matrix
-  - Synapse
 ---
 
 

@@ -3,9 +3,6 @@ title: 教你搭建Chevereto这个超级强大的图床！
 date: '2025-07-15'
 description: 被宝塔开心版的站长推荐了Chevereto这个图床，刚好刚刚嫖了个免费的虚拟主机，让我们开始折腾！
 draft: false
-tags:
-  - Chevereto
-  - 图床
 ---
 
 # 视频教程

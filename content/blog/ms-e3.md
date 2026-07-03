@@ -3,9 +3,6 @@ title: 永久免费OneDrive 5T，MS 365 E3保姆级拿下教程！
 date: '2025-11-14'
 description: 曾经免费拿E5，但是封车很久了，现在E3又来了，快上车！
 draft: false
-tags:
-  - 微软
-  - OneDrive
 ---
 > [!CAUTION]
 > 已封车

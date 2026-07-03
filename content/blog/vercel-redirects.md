@@ -3,9 +3,6 @@ title: 配置 Vercel.json 以支持服务器级别的重定向
 date: '2025-09-01'
 description: 如果你的站点（无论静态/动态）正在使用Vercel，则配置重定向是一件非常轻松的事情
 draft: false
-tags:
-  - Vercel
-  - 重定向
 ---
 # 正式开始
 

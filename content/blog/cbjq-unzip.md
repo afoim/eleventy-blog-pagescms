@@ -3,9 +3,6 @@ title: 记录解包尘白禁区以获得涩涩（？）CG
 date: '2025-08-23'
 description: 受人委托解包尘白禁区的加载图CG，记录一下流程，方便日后复习
 draft: false
-tags:
-  - 尘白禁区
-  - 解包
 ---
 
 > 参考了 [虚幻4游戏解包导出及Mod制作指南 - 知乎](https://zhuanlan.zhihu.com/p/7144045084)

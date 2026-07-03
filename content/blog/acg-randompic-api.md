@@ -3,8 +3,6 @@ title: 公开架构，我的二次元随机图API是怎么做的
 date: '2025-09-05'
 description: 发现很多小伙伴也想搭建一个自己的随机图API，这里我就公开一下我的架构，打磨2年了，供大家参考~
 draft: false
-tags:
-  - 随机图API
 ---
 
 # API端点

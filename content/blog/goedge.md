@@ -3,9 +3,6 @@ title: GoEdge自建CDN系统踩坑记录
 date: '2025-09-08'
 description: 卧槽，一不小心搞到了3台免费VPS，可是不用容易被回收，这可咋办啊！欸？不如让他们都干点活吧！
 draft: false
-tags:
-  - CDN
-  - GoEdge
 ---
 
 

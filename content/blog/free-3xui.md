@@ -3,8 +3,6 @@ title: 白嫖免费的3x-ui面板
 date: '2025-04-30'
 description: 3x-ui面板是一个非常好用的代理面板，很多人都在使用他，如果有人使用的是默认密码...
 draft: false
-tags:
-  - 3x-ui
 ---
 
 

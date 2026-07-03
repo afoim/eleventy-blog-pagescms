@@ -3,9 +3,6 @@ title: 都5202年了，还有人不会自建自己的Cloudflare/EdgeOne等各种
 date: '2025-07-21'
 description: 自建各大CDN服务的优选域名非常简单，只需要先这样，再这样...但是踩坑的地方也不少...
 draft: false
-tags:
-  - 优选
-  - CDN
 ---
 
 

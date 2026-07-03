@@ -3,8 +3,6 @@ title: 记录迁移Umami，从本地到云
 date: '2025-08-28'
 description: 之前的站点统计部署在家里云NAS，通过IPv6回源，而现在我将他迁移到了Render+Supabase
 draft: false
-tags:
-  - Umami
 ---
 
 

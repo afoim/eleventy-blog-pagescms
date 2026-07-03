@@ -3,8 +3,6 @@ title: 哪吒监控搭建教程
 date: '2025-09-02'
 description: 想不想在上帝视角监测你的服务器？顺便再把Uptime Kuma的活也干了！
 draft: false
-tags:
-  - 哪吒监控
 ---
 
 

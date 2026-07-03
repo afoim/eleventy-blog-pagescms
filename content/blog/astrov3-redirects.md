@@ -3,9 +3,6 @@ title: 利用Astrov3的原生重定向来实现各种各样的高级重定向！
 date: '2025-09-01'
 description: 曾经，我使用Cloudflare Pages Redirects来实现我的个人短链重定向，而现在我发现我可以直接将它集成到我的Astro博客
 draft: false
-tags:
-  - 重定向
-  - Astro
 ---
 
 

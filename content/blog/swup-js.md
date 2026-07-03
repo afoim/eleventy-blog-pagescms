@@ -3,9 +3,6 @@ title: 解决困扰我多时的JS重复请求问题
 date: '2025-11-18'
 description: 这篇文章记录了博客在接入动态访问量统计后，因 Swup 处理不当而产生重复请求的问题，以及最终的排查与修复过程
 draft: false
-tags:
-  - Swup
-  - JS
 ---
 
 # 正式开始

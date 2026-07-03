@@ -3,9 +3,6 @@ title: 想玩k3s？Zeabur来帮你！
 date: '2025-09-02'
 description: Zeabur是一个PaaS服务，它可以让你将自己的服务器托管上去，然后在网页上进行管理，就像传统服务器面板一样，这些都是免费！
 draft: false
-tags:
-  - k3s
-  - Zeabur
 ---
 # 这是个啥？
 

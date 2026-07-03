@@ -3,8 +3,6 @@ title: 我为什么要买个Mac
 date: '2025-09-30'
 description: Mac的好处是：便携、续航长、性能高。缺点是贵、要重新学一个新系统的操作。仅对我个人，我认为我从Win换到Mac是一个正确的决定
 draft: false
-tags:
-  - Mac
 ---
 
 # 我为什么决定买一个Mac

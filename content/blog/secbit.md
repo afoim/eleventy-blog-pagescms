@@ -3,8 +3,6 @@ title: 测评一下SecBit MCDN HK区域的质量
 date: '2025-07-01'
 description: 在我哥们的帮助下也是成功通过我的博客拿到了Secbit的免费MCDN服务，再见EdgeOne（
 draft: false
-tags:
-  - Secbit
 ---
 
 

@@ -3,9 +3,6 @@ title: 你可曾想过，直接将BitWarden部署到Cloudflare Worker？
 date: '2026-01-26'
 description: warden-worker就是这样一个项目，它将Rust编译为WASM，然后部署到Cloudflare Worker，无需VPS，无需家里云，只需点点鼠标就可免费用上自己的密码托管！
 draft: false
-tags:
-  - Cloudflare
-  - Bitwarden
 ---
 # 原理
 项目参考开源的 [dani-garcia/vaultwarden: Unofficial Bitwarden compatible server written in Rust, formerly known as bitwarden_rs](https://github.com/dani-garcia/vaultwarden) 将Rust源码编译为WASM以支持在Cloudflare Worker上运行。其中Worker负责REST API，D1负责存储加密后的数据

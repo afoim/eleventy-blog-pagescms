@@ -3,10 +3,6 @@ title: NAT1开放内网网站
 date: '2025-05-30'
 description: 利用CF动态重定向透过STUN+Lucky WebHook实时更新STUN端口实现NAT1家宽建站
 draft: false
-tags:
-  - NAT1
-  - Lucky
-  - Cloudflare
 ---
 
 

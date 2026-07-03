@@ -3,8 +3,6 @@ title: 我给BetterStack的状态页面汉化了
 date: '2025-08-28'
 description: 闲着没事打开 BetterStack 的状态页面时，我发现里面一会儿中文、一会儿英文，索性就把它整体汉化了一遍。
 draft: false
-tags:
-  - BetterStack
 ---
 
 

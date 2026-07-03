@@ -3,9 +3,6 @@ title: 使用基于IPFS的Fleek部署静态网站、托管图床、部署服务
 date: '2024-10-16'
 description: IPFS是一个多节点的文件托管系统，你可以在上面共享文件、发布网站、而Fleek自动化了这个过程，并且可以链接你的Git存储库
 draft: false
-tags:
-  - Fleek
-  - IPFS
 ---
 
 

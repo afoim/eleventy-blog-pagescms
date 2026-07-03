@@ -3,8 +3,6 @@ title: Oracle（甲骨文云）踩坑记录
 date: '2025-09-07'
 description: 在钞能力的帮助下也是成功薅到了一个甲骨文账号，上手把玩发现坑点挺多的，遂记录
 draft: false
-tags:
-  - Oracle
 ---
 # 老天保佑我不要ABC
 

@@ -3,8 +3,6 @@ title: 使用NoneBot2搭建你的QQBot！
 date: '2024-11-19'
 description: 使用NapCat连接NoneBot2，打造自己的聊天机器人
 draft: false
-tags:
-  - QQBot
 ---
 
 # 安装 NapCat(Win)

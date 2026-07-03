@@ -3,8 +3,6 @@ title: 对标CF Worker？拿EdgeOne边缘函数做一个随机图API！
 date: '2025-07-31'
 description: 很早就知道EdgeOne边缘函数，一直都没来得及体验，今天上手后发现它真的很强大
 draft: false
-tags:
-  - EdgeOne
 ---
 
 

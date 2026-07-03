@@ -3,10 +3,6 @@ title: 上手米哈游AI，然后把它逆了！
 date: '2025-12-02'
 description: AnuNeko是一只会哈气的橘猫...其实不是，AnuNeko是由米哈游创始人做的AI大模型，会哈气。于是便做个QQBot给群友玩
 draft: false
-tags:
-  - AnuNeko
-  - NoneBot2
-  - AI
 ---
 # 这是What
 这是橘猫，会哈气（见封面

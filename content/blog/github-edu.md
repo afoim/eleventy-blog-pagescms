@@ -3,9 +3,6 @@ title: Github学生认证 + GitHub Education福利大全
 date: '2025-08-07'
 description: Github学生认证教程，以及通过验证后可领取的各种免费福利，包括免费域名等！
 draft: false
-tags:
-  - Github
-  - Github Edu
 ---
 
 

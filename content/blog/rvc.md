@@ -3,11 +3,6 @@ title: 手把手教你AI翻唱！
 date: '2025-10-13'
 description: 利用RVC训练音色模型然后使用Replay直出AI翻唱！
 draft: false
-tags:
-  - AI
-  - RVC
-  - Replay
-  - UVR
 ---
 
 # 视频教程
