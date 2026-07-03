@@ -107,7 +107,14 @@
 			isPanning = false; lbWrap.style.cursor = 'grab';
 		});
 		lbWrap.addEventListener('dragstart', e => e.preventDefault());
-		{% endjs %}
+		// 外链自动 blank
+document.querySelectorAll('a[href^=http]').forEach(a => {
+	if (!a.href.includes(location.host)) {
+		a.target = '_blank';
+		a.rel = 'noopener';
+	}
+});
+{% endjs %}
 		<script>{% getBundle "js" %}</script>
 	</body>
 </html>
