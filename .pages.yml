@@ -34,7 +34,7 @@ content:
         label: Navigation
         type: object
         fields:
-          - { name: key, label: Key, type: string }
+          - { name: key, label: 标识, type: string }
           - { name: order, label: Order, type: number }
       - { name: body, label: Body, type: rich-text }
   - name: metadata

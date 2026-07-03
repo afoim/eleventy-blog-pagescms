@@ -1,9 +1,9 @@
 ---
 layout: layouts/base.njk
 eleventyNavigation:
-  key: About Me
+  key: 关于
   order: 3
 ---
-# About Me
+# 关于
 
-I am a person that writes stuff.
+一个随时都会冒出新奇想法的神奇小站

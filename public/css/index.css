@@ -1,10 +1,8 @@
-/* Defaults */
 :root {
 	--font-family: -apple-system, system-ui, sans-serif;
 	--font-family-monospace: Consolas, Menlo, Monaco, Andale Mono WT, Andale Mono, Lucida Console, Lucida Sans Typewriter, DejaVu Sans Mono, Bitstream Vera Sans Mono, Liberation Mono, Nimbus Mono L, Courier New, Courier, monospace;
 }
 
-/* Theme colors */
 :root {
 	--color-gray-20: #e0e0e0;
 	--color-gray-50: #C0C0C0;
@@ -26,7 +24,6 @@
 		--color-gray-50: #C0C0C0;
 		--color-gray-90: #dad8d8;
 
-		/* --text-color is assigned to --color-gray-_ above */
 		--text-color-link: #1493fb;
 		--text-color-link-active: #6969f7;
 		--text-color-link-visited: #a6a6f8;
@@ -35,8 +32,6 @@
 	}
 }
 
-
-/* Global stylesheet */
 * {
 	box-sizing: border-box;
 }
@@ -56,7 +51,6 @@ body {
 	max-width: 40em;
 }
 
-/* https://www.a11yproject.com/posts/how-to-hide-content/ */
 .visually-hidden {
 	clip: rect(0 0 0 0);
 	clip-path: inset(50%);
@@ -105,6 +99,14 @@ header:after {
 	clear: both;
 }
 
+.site-icon {
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	vertical-align: middle;
+	margin-right: 0.3em;
+}
+
 .links-nextprev {
 	list-style: none;
 	border-top: 1px dashed var(--color-gray-20);
@@ -125,7 +127,7 @@ code {
 }
 pre:not([class*="language-"]) {
 	margin: .5em 0;
-	line-height: 1.375; /* 22px /16 */
+	line-height: 1.375;
 	-moz-tab-size: var(--syntax-tab-size);
 	-o-tab-size: var(--syntax-tab-size);
 	tab-size: var(--syntax-tab-size);
@@ -142,7 +144,6 @@ code {
 	word-break: break-all;
 }
 
-/* Header */
 header {
 	display: flex;
 	gap: 1em .5em;
@@ -151,15 +152,16 @@ header {
 	padding: 1em;
 }
 .home-link {
-	font-size: 1em; /* 16px /16 */
+	font-size: 1em;
 	font-weight: 700;
 	margin-right: 2em;
+	display: flex;
+	align-items: center;
 }
 .home-link:link:not(:hover) {
 	text-decoration: none;
 }
 
-/* Nav */
 .nav {
 	display: flex;
 	padding: 0;
@@ -177,7 +179,6 @@ header {
 	text-decoration: underline;
 }
 
-/* Posts list */
 .postlist {
 	list-style: none;
 	padding: 0;
@@ -200,14 +201,14 @@ header {
 }
 .postlist-date,
 .postlist-item:before {
-	font-size: 0.8125em; /* 13px /16 */
+	font-size: 0.8125em;
 	color: var(--color-gray-90);
 }
 .postlist-date {
 	word-spacing: -0.5px;
 }
 .postlist-link {
-	font-size: 1.1875em; /* 19px /16 */
+	font-size: 1.1875em;
 	font-weight: 700;
 	flex-basis: calc(100% - 1.5rem);
 	padding-left: .25em;
@@ -220,7 +221,6 @@ header {
 	font-weight: bold;
 }
 
-/* Tags */
 .post-tag {
 	display: inline-flex;
 	align-items: center;
@@ -232,7 +232,6 @@ header {
 	align-self: center;
 }
 
-/* Tags list */
 .post-metadata {
 	display: inline-flex;
 	flex-wrap: wrap;
@@ -245,7 +244,6 @@ header {
 	margin-right: 1em;
 }
 
-/* Direct Links / Markdown Headers */
 .header-anchor {
 	text-decoration: none;
 	font-style: normal;
