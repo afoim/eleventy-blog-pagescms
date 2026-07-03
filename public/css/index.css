@@ -365,6 +365,7 @@ h2 + .header-anchor {
 	right: 24px;
 	font-size: 2em;
 	color: #fff;
+	text-shadow: 0 0 6px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.8);
 	cursor: pointer;
 	z-index: 10;
 	line-height: 1;
