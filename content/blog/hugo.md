@@ -199,6 +199,7 @@ layout: "search"
 
 在 `archetypes\default.md` 写入：
 
+{% raw %}
 ```markdown
 ---
 title: {{ replace .File.ContentBaseName "-" " " | title }}
@@ -212,6 +213,7 @@ draft: false
 lang: ''
 ---
 ```
+{% endraw %}
 
 接下来我们就可以通过命令来创建文章，并开始写作了。注意，最终构建的文章URL是你的文章的文件名。比如：`https://你的网站.com/posts/first` 所以文章文件名尽量简短，这并不会影响你的文章标题
 

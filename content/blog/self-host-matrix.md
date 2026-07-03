@@ -60,6 +60,7 @@ tags:
 编辑 `homeserver.yaml` ，并按需配置
 
 ```yaml
+{% raw %}
 server_name: "家服务器名称，比如：m.2x.nz"
 public_baseurl: "公共URL，比如：https://m.2x.nz"
 pid_file: /data/homeserver.pid
@@ -175,6 +176,7 @@ delete_stale_devices_after: 1y
 auto_join_rooms:
   - "#XXX:你的家服务器URL" # 需要自动加入的房间
 ```
+{% endraw %}
 
 按需配置，更多高级配置参阅： [Homeserver Sample Config File - Synapse](https://element-hq.github.io/synapse/latest/usage/configuration/homeserver_sample_config.html)
 
