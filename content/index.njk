@@ -1,13 +1,13 @@
 ---
 layout: layouts/home.njk
 eleventyNavigation:
-  key: Home
+  key: 首页
   order: 1
 numberOfLatestPostsToShow: 3
 ---
 {% set postsCount = collections.posts | length %}
 {% set latestPostsCount = postsCount | min(numberOfLatestPostsToShow) %}
-<h1>Latest {{ latestPostsCount }} Post{% if latestPostsCount != 1 %}s{% endif %}</h1>
+<h1>最新 {{ latestPostsCount }} 篇</h1>
 
 {% set postslist = collections.posts | head(-1 * numberOfLatestPostsToShow) %}
 {% set postslistCounter = postsCount %}
@@ -15,7 +15,7 @@ numberOfLatestPostsToShow: 3
 
 {% set morePosts = postsCount - numberOfLatestPostsToShow %}
 {% if morePosts > 0 %}
-<p>{{ morePosts }} more post{% if morePosts != 1 %}s{% endif %} can be found in <a href="/blog/">the archive</a>.</p>
+<p>还有 {{ morePosts }} 篇，详见<a href="/blog/">归档</a>。</p>
 {% endif %}
 
 {# List every content page in the project #}

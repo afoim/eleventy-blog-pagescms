@@ -6,8 +6,8 @@ actions:
     workflow: deploy.yml
     ref: main
     confirm:
-      title: Deploy to Cloudflare Pages?
-      message: This will build the site and deploy it to Cloudflare Pages.
+      title: 部署到 Cloudflare Workers？
+      message: 将构建站点并部署到 Cloudflare Workers。
       button: Deploy
 
 content:
