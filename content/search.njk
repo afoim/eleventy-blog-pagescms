@@ -1,0 +1,171 @@
+---
+layout: layouts/base.njk
+eleventyNavigation:
+  key: 搜索
+  order: 4
+permalink: /search/
+---
+
+<style>
+.search-box {
+	width: 100%;
+	padding: 0.6em 0.8em;
+	font-size: 1.1em;
+	border: 1px solid #2a3a4e;
+	border-radius: 6px;
+	background: #1a2a3d;
+	color: #dad8d8;
+	outline: none;
+	margin-bottom: 1.5em;
+}
+.search-box:focus {
+	border-color: #4d96ff;
+}
+.search-info {
+	font-size: 0.85em;
+	color: #888;
+	margin-bottom: 1em;
+}
+.search-result {
+	padding: 0.8em 0;
+	border-bottom: 1px solid #2a3a4e;
+}
+.search-result:last-child {
+	border-bottom: none;
+}
+.search-result-title {
+	font-size: 1.1em;
+	font-weight: 700;
+	margin-bottom: 0.3em;
+}
+.search-result-title a {
+	color: var(--text-color-link);
+	text-decoration: none;
+}
+.search-result-title a:hover {
+	text-decoration: underline;
+}
+.search-result-desc {
+	font-size: 0.9em;
+	color: var(--color-gray-90);
+	line-height: 1.5;
+}
+.search-result-desc em {
+	font-style: normal;
+	background: #b8860b33;
+	color: #ffd700;
+	padding: 0 2px;
+	border-radius: 2px;
+}
+.search-empty {
+	color: #888;
+	text-align: center;
+	padding: 2em;
+}
+</style>
+
+<h1>搜索</h1>
+
+<input type="search" class="search-box" id="searchInput" placeholder="输入关键词搜索…" autofocus>
+<p class="search-info" id="searchInfo"></p>
+<div id="searchResults"></div>
+
+{%- js %}
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+const searchInfo = document.getElementById('searchInfo');
+
+// 清除HTML标签
+function stripHTML(html) {
+	const d = document.createElement('div');
+	d.innerHTML = html;
+	return d.textContent || d.innerText || '';
+}
+
+// 高亮关键词
+function highlight(text, terms) {
+	let result = text;
+	for (const term of terms) {
+		const re = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+		result = result.replace(re, m => `<em>${m}</em>`);
+	}
+	return result;
+}
+
+let feedData = [];
+let searchWorker = null;
+
+async function loadFeed() {
+	try {
+		const res = await fetch('/feed/feed.xml');
+		const xml = await res.text();
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(xml, 'text/xml');
+		const entries = doc.querySelectorAll('entry');
+		feedData = [];
+		entries.forEach(entry => {
+			const title = entry.querySelector('title')?.textContent || '';
+			const link = entry.querySelector('link')?.getAttribute('href') || '';
+			const content = stripHTML(entry.querySelector('content')?.textContent || '');
+			feedData.push({ title, link, content });
+		});
+		searchInfo.textContent = `已索引 ${feedData.length} 篇文章`;
+	} catch (e) {
+		searchInfo.textContent = '无法加载搜索索引';
+	}
+}
+
+function doSearch() {
+	const query = searchInput.value.trim();
+	if (!query) {
+		searchResults.innerHTML = '';
+		searchInfo.textContent = `已索引 ${feedData.length} 篇文章`;
+		return;
+	}
+
+	const terms = query.split(/\s+/).filter(Boolean);
+	const results = feedData
+		.map(item => {
+			let score = 0;
+			let titleMatch = item.title;
+			let contentMatch = item.content;
+			for (const term of terms) {
+				const re = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+				const tMatch = item.title.match(re);
+				const cMatch = item.content.match(re);
+				if (tMatch) score += tMatch.length * 3;
+				if (cMatch) score += cMatch.length;
+			}
+			titleMatch = highlight(item.title, terms);
+			contentMatch = highlight(item.content.slice(0, 300), terms);
+			return { ...item, score, titleMatch, contentMatch };
+		})
+		.filter(item => item.score > 0)
+		.sort((a, b) => b.score - a.score);
+
+	if (results.length === 0) {
+		searchResults.innerHTML = '<p class="search-empty">没有找到匹配的结果</p>';
+		searchInfo.textContent = `共 0 条结果（已索引 ${feedData.length} 篇）`;
+		return;
+	}
+
+	searchResults.innerHTML = results.map(item => `
+		<div class="search-result">
+			<div class="search-result-title"><a href="${item.link}">${item.titleMatch}</a></div>
+			<div class="search-result-desc">${item.contentMatch}${item.content.length > 300 ? '…' : ''}</div>
+		</div>
+	`).join('');
+
+	searchInfo.textContent = `共 ${results.length} 条结果（已索引 ${feedData.length} 篇）`;
+}
+
+// 防抖
+let debounceTimer;
+searchInput.addEventListener('input', () => {
+	clearTimeout(debounceTimer);
+	debounceTimer = setTimeout(doSearch, 200);
+});
+
+loadFeed();
+{% endjs %}
+<script>{% getBundle "js" %}</script>
