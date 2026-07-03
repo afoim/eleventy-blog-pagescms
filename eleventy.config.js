@@ -32,24 +32,15 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 	eleventyConfig.addPlugin(pluginBundle);
 
-	// 外链自动 target=_blank + 修正 ~~ 粘在 URL 末尾的问题（构建时，排除本站域名）
+	// 外链自动 target=_blank（构建时，排除本站域名）
 	const siteUrl = require("./_data/metadata.js").url;
 	const siteHost = siteUrl ? siteUrl.replace(/https?:\/\//, "").replace(/\/$/, "") : "";
 	eleventyConfig.addTransform("externalBlank", (content, outputPath) => {
 		if (!outputPath || !outputPath.endsWith(".html")) return content;
-		return content.replace(/<a\s+([^>]*?)href="(https?:\/\/[^"]*?)("([^>]*)>)([\s\S]*?)<\/a>/gi, (match, before, url, quote, after, inner) => {
-			// 去掉 URL 末尾误粘的波浪线
-			const cleanUrl = url.replace(/~+$/, '');
-			const cleanInner = inner.replace(/~+$/, '');
-			if (cleanUrl === url) {
-				// 正常链接，只加 target
-				if (before.includes("target=")) return match;
-				try { if (new URL(url).host === siteHost) return match; } catch(e) {}
-				return '<a target="_blank" rel="noopener" ' + before + 'href="' + url + '"' + after + '>';
-			}
-			// 有波浪线粘在 URL 末尾，修复
-			try { if (new URL(cleanUrl).host === siteHost) return match; } catch(e) {}
-			return '<a target="_blank" rel="noopener" ' + before + 'href="' + cleanUrl + '"' + after + '>' + cleanInner + '</a>';
+		return content.replace(/<a\s+([^>]*?)href="(https?:\/\/[^"]*?)"([^>]*)>/gi, (match, before, url, after) => {
+			if (before.includes("target=")) return match;
+			try { if (new URL(url).host === siteHost) return match; } catch(e) {}
+			return '<a target="_blank" rel="noopener" ' + before + 'href="' + url + '"' + after + '>';
 		});
 	});
 
