@@ -25,6 +25,7 @@ content:
       - { name: description, label: Description, type: string }
       - { name: date, label: Date, type: date }
       - { name: draft, label: Draft, type: boolean }
+      - { name: pin, label: 置顶, type: boolean }
       - { name: tags, label: Tags, type: string, list: true }
       - { name: body, label: Body, type: rich-text }
   - name: about

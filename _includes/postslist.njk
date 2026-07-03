@@ -1,8 +1,5 @@
-{%- if postslistCounter %}
-{%- css %}.postlist { counter-reset: start-from {{ postslistCounter + 1 }} }{% endcss %}
-{%- endif %}
-<ol reversed class="postlist">
-{% for post in postslist | reverse %}
+<ol class="postlist">
+{% for post in postslist | sortByPin %}
 	<li class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
 		{%- if post.data.coverImage %}
 		<a href="{{ post.url }}" class="postlist-cover-link">
