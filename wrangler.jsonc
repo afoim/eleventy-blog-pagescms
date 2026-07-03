@@ -1,10 +1,9 @@
 {
 	"name": "acofork-feed",
-	"main": "src/_worker.js",
 	"compatibility_date": "2026-07-01",
 	"assets": {
 		"directory": "_site",
-		"not_found_handling": "404.html"
+		"not_found_handling": "404-page"
 	},
 	"routes": [
 		"feed.2x.nz/*"
