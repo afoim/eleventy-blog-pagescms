@@ -117,7 +117,7 @@ blockquote[data-alert] {
 	display: flow-root;
 }
 blockquote[data-alert] p:first-child {
-	margin-top: 0.5em;
+	margin-top: 0;
 }
 blockquote[data-alert-tip] {
 	border-left-color: #22c55e;
