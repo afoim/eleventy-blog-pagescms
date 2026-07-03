@@ -52,46 +52,35 @@
 		const lbWrap = lb.querySelector('.lightbox-wrap');
 		let scale = 1, panX = 0, panY = 0, isPanning = false, startX, startY;
 
-		function apply() {
-			lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`;
-		}
+		function apply() { lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`; }
 		function resetView() {
 			const nw = lbImg.naturalWidth, nh = lbImg.naturalHeight;
 			if (!nw || !nh) return;
 			const vw = window.innerWidth, vh = window.innerHeight;
 			scale = Math.min(vw / nw, vh / nh);
-			panX = (vw - nw * scale) / 2;
-			panY = (vh - nh * scale) / 2;
+			panX = (vw - nw * scale) / 2; panY = (vh - nh * scale) / 2;
 			apply();
 		}
-
 		document.querySelector('main').addEventListener('click', e => {
 			const img = e.target.closest('img');
 			if (!img || !img.closest('main')) return;
 			if (img.closest('.postlist-cover-link') || img.closest('.site-icon')) return;
-			lbImg.src = img.src;
-			lb.classList.add('active');
+			lbImg.src = img.src; lb.classList.add('active');
 			lbImg.addEventListener('load', resetView, { once: true });
 		});
-
-		lb.addEventListener('click', e => {
-			if (e.target === lb || e.target === lbImg) lb.classList.remove('active');
-		});
+		lb.addEventListener('click', e => { if (e.target === lb || e.target === lbImg) lb.classList.remove('active'); });
 		lb.querySelector('.lightbox-close').addEventListener('click', () => lb.classList.remove('active'));
 		document.addEventListener('keydown', e => {
 			if (e.key === 'Escape') lb.classList.remove('active');
 			if (e.key === 'r' || e.key === 'R') resetView();
 		});
-
 		lbWrap.addEventListener('wheel', e => {
 			e.preventDefault();
 			const ns = Math.max(0.5, Math.min(scale * (e.deltaY > 0 ? 0.9 : 1.1), 20));
 			panX = e.clientX - (e.clientX - panX) * ns / scale;
 			panY = e.clientY - (e.clientY - panY) * ns / scale;
-			scale = ns;
-			apply();
+			scale = ns; apply();
 		}, { passive: false });
-
 		lbWrap.addEventListener('mousedown', e => {
 			if (e.button !== 0) return;
 			e.preventDefault();
@@ -103,9 +92,7 @@
 			panX = e.clientX - startX; panY = e.clientY - startY;
 			apply();
 		});
-		document.addEventListener('mouseup', () => {
-			isPanning = false; lbWrap.style.cursor = 'grab';
-		});
+		document.addEventListener('mouseup', () => { isPanning = false; lbWrap.style.cursor = 'grab'; });
 		lbWrap.addEventListener('dragstart', e => e.preventDefault());
 
 		// 外链自动 blank
@@ -114,21 +101,16 @@
 		});
 
 		// GFM 警报块 > [!tip|info|warning|caution]
+		const ALERTS = { tip:['💡','提示'], info:['📖','信息'], warning:['⚠️','注意'], caution:['🚨','警告'] };
 		document.querySelectorAll('blockquote').forEach(bq => {
 			const p = bq.querySelector('p:first-child');
 			if (!p) return;
-			const text = p.textContent.trim();
-			const types = [
-				{ key: 'tip', emoji: '💡', label: '提示' },
-				{ key: 'info', emoji: '📖', label: '信息' },
-				{ key: 'warning', emoji: '⚠️', label: '注意' },
-				{ key: 'caution', emoji: '🚨', label: '警告' }
-			];
-			for (const t of types) {
-				if (new RegExp('^\\[' + t.key + '\\]', 'i').test(text)) {
-					bq.dataset.alert = '';
-					bq.dataset['alert' + t.key.charAt(0).toUpperCase() + t.key.slice(1)] = '';
-					p.innerHTML = p.innerHTML.replace(new RegExp('^\\[' + t.key + '\\]', 'i'), t.emoji + ' ' + t.label);
+			const txt = p.textContent.trim();
+			for (const key in ALERTS) {
+				if (new RegExp('^\\[' + key + '\\]', 'i').test(txt)) {
+					bq.setAttribute('data-alert', '');
+					bq.setAttribute('data-alert-' + key, '');
+					p.innerHTML = p.innerHTML.replace(new RegExp('^\\[' + key + '\\]', 'i'), ALERTS[key][0] + ' ' + ALERTS[key][1]);
 					break;
 				}
 			}
