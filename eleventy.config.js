@@ -32,10 +32,19 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 	eleventyConfig.addPlugin(pluginBundle);
 
+	// 外链自动 target=_blank（构建时）
+	eleventyConfig.addTransform("externalBlank", (content, outputPath) => {
+		if (!outputPath || !outputPath.endsWith(".html")) return content;
+		return content.replace(/<a\s+([^>]*?)href="https?:\/\/([^"]*)"([^>]*)>/gi, (match, before, url, after) => {
+			if (before.includes("target=") || after.includes("target=")) return match;
+			return '<a target="_blank" rel="noopener" ' + before + 'href="https://' + url + '"' + after + '>';
+		});
+	});
+
 	// GFM 警报块 transform：构建时将 > [!tip|info|warning|caution] 转为带样式的 HTML
 	eleventyConfig.addTransform("alertBlocks", (content, outputPath) => {
 		if (!outputPath || !outputPath.endsWith(".html")) return content;
-		const ALERTS = { tip: ["💡", "提示"], info: ["📖", "信息"], warning: ["⚠️", "注意"], caution: ["🚨", "警告"] };
+		const ALERTS = { tip: ["💡", "提示："], info: ["📖", "信息："], warning: ["⚠️", "注意："], caution: ["🚨", "警告："] };
 		return content.replace(/<blockquote>\s*<p>\[!(tip|info|warning|caution)\]\s*([\s\S]*?)<\/p>/gi, (match, type, rest) => {
 			const a = ALERTS[type.toLowerCase()];
 			if (!a) return match;
@@ -108,5 +117,6 @@ module.exports = function(eleventyConfig) {
 		pathPrefix: "/",
 	};
 };
+
 
 
