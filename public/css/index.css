@@ -72,6 +72,11 @@ main {
 main :first-child {
 	margin-top: 0;
 }
+main img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 6px;
+}
 
 header {
 	border-bottom: 1px dashed var(--color-gray-20);
