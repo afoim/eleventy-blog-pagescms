@@ -57,12 +57,11 @@
 		}
 		function resetView() {
 			const nw = lbImg.naturalWidth, nh = lbImg.naturalHeight;
-			if (nw && nh) {
-				const vw = lbWrap.clientWidth, vh = lbWrap.clientHeight;
-				scale = Math.min(vw / nw, vh / nh);
-			} else { scale = 1; }
-			panX = (lbWrap.clientWidth - lbImg.naturalWidth * scale) / 2;
-			panY = (lbWrap.clientHeight - lbImg.naturalHeight * scale) / 2;
+			if (!nw || !nh) return;
+			const vw = window.innerWidth, vh = window.innerHeight;
+			scale = Math.min(vw / nw, vh / nh);
+			panX = (vw - nw * scale) / 2;
+			panY = (vh - nh * scale) / 2;
 			apply();
 		}
 
@@ -72,8 +71,7 @@
 			if (img.closest('.postlist-cover-link') || img.closest('.site-icon')) return;
 			lbImg.src = img.src;
 			lb.classList.add('active');
-			if (lbImg.complete) resetView();
-			else lbImg.addEventListener('load', resetView, { once: true });
+			lbImg.addEventListener('load', resetView, { once: true });
 		});
 
 		lb.addEventListener('click', e => {
