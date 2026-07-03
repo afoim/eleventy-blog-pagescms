@@ -32,12 +32,18 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 	eleventyConfig.addPlugin(pluginBundle);
 
-	// 外链自动 target=_blank（构建时）
+	// 外链自动 target=_blank（构建时，排除本站域名）
+	const siteUrl = require("./_data/metadata.js").url;
+	const siteHost = siteUrl ? siteUrl.replace(/https?:\/\//, "").replace(/\/$/, "") : "";
 	eleventyConfig.addTransform("externalBlank", (content, outputPath) => {
 		if (!outputPath || !outputPath.endsWith(".html")) return content;
-		return content.replace(/<a\s+([^>]*?)href="https?:\/\/([^"]*)"([^>]*)>/gi, (match, before, url, after) => {
+		return content.replace(/<a\s+([^>]*?)href="(https?:\/\/[^"]*)"([^>]*)>/gi, (match, before, url, after) => {
 			if (before.includes("target=") || after.includes("target=")) return match;
-			return '<a target="_blank" rel="noopener" ' + before + 'href="https://' + url + '"' + after + '>';
+			try {
+				const host = new URL(url).host;
+				if (host === siteHost) return match;
+			} catch(e) {}
+			return '<a target="_blank" rel="noopener" ' + before + 'href="' + url + '"' + after + '>';
 		});
 	});
 
@@ -92,6 +98,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.amendLibrary("md", mdLib => {
+		mdLib.set({ linkify: true });
 		mdLib.use(markdownItAnchor, {
 			permalink: markdownItAnchor.permalink.ariaHidden({
 				placement: "after",
