@@ -6,7 +6,7 @@ draft: false
 coverImage: /public/img/cf-fastip-cf-fastip-11.webp
 ---
 # 相关视频：
-- **全解**： https://www.bilibili.com/video/BV1QpSoBqERj
+- **全解**： <https://www.bilibili.com/video/BV1QpSoBqERj>
 - ~~SaaS原理：`https://www.bilibili.com/video/BV1A5rpBqENh/`~~
 - ~~Worker/Pages优选：`https://www.bilibili.com/video/BV1KNmtB6EU7/`~~
 - ~~R2优选：`https://www.bilibili.com/video/BV115KLzSEiv/`~~
