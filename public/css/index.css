@@ -242,6 +242,18 @@ header {
 	font-weight: bold;
 }
 
+.postlist-link-pin {
+	background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff, #ff6b6b);
+	background-size: 200% auto;
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: pinShine 3s linear infinite;
+}
+@keyframes pinShine {
+	to { background-position: 200% center; }
+}
+
 .post-tag {
 	display: inline-flex;
 	align-items: center;

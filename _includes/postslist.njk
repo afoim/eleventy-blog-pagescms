@@ -7,7 +7,7 @@
 		</a>
 		{%- endif %}
 		<div class="postlist-content">
-			<a href="{{ post.url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
+			<a href="{{ post.url }}" class="postlist-link{% if post.data.pin %} postlist-link-pin{% endif %}">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
 			{%- if post.data.pin %}<span class="postlist-pin">📌 置顶</span>{%- endif %}
 			{%- if post.data.description %}
 			<p class="postlist-desc">{{ post.data.description }}</p>
