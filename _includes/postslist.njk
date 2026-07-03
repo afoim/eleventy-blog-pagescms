@@ -11,6 +11,9 @@
 		{%- endif %}
 		<div class="postlist-content">
 			<a href="{{ post.url }}" class="postlist-link">{% if post.data.title %}{{ post.data.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</a>
+			{%- if post.data.description %}
+			<p class="postlist-desc">{{ post.data.description }}</p>
+			{%- endif %}
 			<time class="postlist-date" datetime="{{ post.date | htmlDateString }}">{{ post.date | readableDate }}</time>
 		</div>
 	</li>
