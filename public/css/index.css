@@ -10,6 +10,7 @@
 	--text-color-link-active: #6969f7;
 	--text-color-link-visited: #a6a6f8;
 
+	--text-color: var(--color-gray-90);
 	--background-color: #15202b;
 
 	--syntax-tab-size: 2;
