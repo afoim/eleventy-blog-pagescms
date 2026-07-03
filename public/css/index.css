@@ -243,8 +243,10 @@ header {
 }
 
 .postlist-link-pin {
-	display: inline-block;
-	color: #4d96ff !important;
+	color: inherit;
+	text-decoration: inherit;
+}
+.pin-gradient {
 	background-image: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcb77, #4d96ff);
 	background-size: 300% 100%;
 	background-position: 0% 50%;
