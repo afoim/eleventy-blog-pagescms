@@ -106,7 +106,8 @@ async function loadFeed() {
 		feedData = [];
 		entries.forEach(entry => {
 			const title = entry.querySelector('title')?.textContent || '';
-			const link = entry.querySelector('link')?.getAttribute('href') || '';
+			const rawLink = entry.querySelector('link')?.getAttribute('href') || '';
+			const link = rawLink.startsWith('http') ? new URL(rawLink).pathname : rawLink;
 			const desc = entry.querySelector('description')?.textContent || '';
 			const coverEl = entry.querySelector('coverimage');
 			const cover = coverEl?.textContent || '';
