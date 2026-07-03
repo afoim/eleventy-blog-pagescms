@@ -38,5 +38,64 @@
 		</main>
 
 		<footer></footer>
+
+		<div id="lightbox" class="lightbox">
+			<span class="lightbox-close">&times;</span>
+			<div class="lightbox-wrap">
+				<img class="lightbox-img" src="" alt="">
+			</div>
+		</div>
+
+		{%- js %}
+		const lb = document.getElementById('lightbox');
+		const lbImg = lb.querySelector('.lightbox-img');
+		const lbWrap = lb.querySelector('.lightbox-wrap');
+		let scale = 1, panX = 0, panY = 0, isPanning = false, startX, startY;
+
+		function resetView() { scale = 1; panX = 0; panY = 0; apply(); }
+		function apply() {
+			lbImg.style.transform = `translate(${panX}px,${panY}px) scale(${scale})`;
+		}
+
+		document.querySelector('main').addEventListener('click', e => {
+			const img = e.target.closest('img');
+			if (!img || !img.closest('main')) return;
+			if (img.closest('.postlist-cover-link') || img.closest('.site-icon')) return;
+			lbImg.src = img.src;
+			lb.classList.add('active');
+			resetView();
+		});
+
+		lb.addEventListener('click', e => {
+			if (e.target === lb || e.target === lbImg) lb.classList.remove('active');
+		});
+		lb.querySelector('.lightbox-close').addEventListener('click', () => lb.classList.remove('active'));
+
+		lbWrap.addEventListener('wheel', e => {
+			e.preventDefault();
+			const delta = e.deltaY > 0 ? 0.9 : 1.1;
+			scale = Math.max(0.5, Math.min(scale * delta, 20));
+			apply();
+		}, { passive: false });
+
+		lbWrap.addEventListener('mousedown', e => {
+			if (e.button !== 0) return;
+			isPanning = true; startX = e.clientX - panX; startY = e.clientY - panY;
+			lbWrap.style.cursor = 'grabbing';
+		});
+		document.addEventListener('mousemove', e => {
+			if (!isPanning) return;
+			panX = e.clientX - startX; panY = e.clientY - startY; apply();
+		});
+		document.addEventListener('mouseup', () => {
+			isPanning = false; lbWrap.style.cursor = 'grab';
+		});
+
+		document.addEventListener('keydown', e => {
+			if (e.key === 'Escape') lb.classList.remove('active');
+			if (e.key === 'r' || e.key === 'R') resetView();
+		});
+		{% endjs %}
+		<script>{% getBundle "js" %}</script>
 	</body>
 </html>
