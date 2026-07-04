@@ -1,0 +1,64 @@
+name: Post Broadcast
+
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: Pages CMS payload as JSON
+        required: true
+        type: string
+
+jobs:
+  broadcast:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send broadcast
+        env:
+          PAYLOAD: ${{ inputs.payload }}
+          BOT_WEBHOOK: ${{ secrets.ANNOUNCE_WEBHOOK_URL }}
+          FORUM_WEBHOOK: ${{ secrets.FORUM_WEBHOOK_URL }}
+          SECRET: ${{ secrets.ANNOUNCE_SECRET }}
+        shell: node {0}
+        run: |
+          const p = JSON.parse(process.env.PAYLOAD);
+          const data = p.context?.data || {};
+          const path = p.context?.path || '';
+          const slug = path.replace(/\.md$/, '').split('/').pop();
+          const title = data.title || slug;
+          const desc = data.description || '博客更新';
+          const url = `https://feed.2x.nz/posts/${slug}/`;
+
+          console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+          console.log('  文章广播推送');
+          console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+          console.log(`  文章:  ${slug}`);
+          console.log(`  标题:  ${title}`);
+          console.log(`  描述:  ${desc}`);
+          console.log(`  URL:   ${url}\n`);
+
+          const body = JSON.stringify({ title, summary: desc, url });
+
+          async function send(webhook, label) {
+            console.log(`  → 发送到 ${label}...`);
+            const resp = await fetch(webhook, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-Announce-Secret': process.env.SECRET,
+              },
+              body,
+            });
+            const text = await resp.text();
+            if (resp.ok) {
+              console.log(`  ✅ ${label} 成功 (${resp.status})`);
+              try { console.log(`  响应: ${JSON.stringify(JSON.parse(text), null, 2)}`); }
+              catch { console.log(`  响应: ${text}`); }
+            } else {
+              console.error(`  ❌ ${label} 失败 (${resp.status}): ${text}`);
+              throw new Error(`${label} 失败`);
+            }
+          }
+
+          await send(process.env.BOT_WEBHOOK, 'Bot 广播');
+          await send(process.env.FORUM_WEBHOOK, '论坛邮件');
+          console.log('\n  ✅ 全部推送完成\n');

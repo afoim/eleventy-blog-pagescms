@@ -14,6 +14,16 @@ content:
   - name: posts
     label: Posts
     type: collection
+    actions:
+      - name: broadcast
+        label: 广播此文章
+        workflow: post-bc.yml
+        ref: main
+        scope: entry
+        confirm:
+          title: 广播此文章？
+          message: 将推送通知到 QQ 群和邮件订阅。
+          button: 广播
     path: content/blog
     filename:
       template: "{primary}.md"
