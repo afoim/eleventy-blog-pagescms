@@ -22,6 +22,7 @@ jobs:
           SECRET: ${{ secrets.ANNOUNCE_SECRET }}
         shell: node {0}
         run: |
+          (async () => {
           const fs = require('fs');
           const p = JSON.parse(process.env.PAYLOAD);
           const ctx = p.context || {};
@@ -85,3 +86,4 @@ jobs:
           await send(process.env.BOT_WEBHOOK, 'Bot 广播');
           await send(process.env.FORUM_WEBHOOK, '论坛邮件');
           console.log('\n  ✅ 全部推送完成\n');
+          })();
