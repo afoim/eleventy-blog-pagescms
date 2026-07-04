@@ -12,6 +12,8 @@ jobs:
   broadcast:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Send broadcast
         env:
           PAYLOAD: ${{ inputs.payload }}
@@ -20,12 +22,33 @@ jobs:
           SECRET: ${{ secrets.ANNOUNCE_SECRET }}
         shell: node {0}
         run: |
+          const fs = require('fs');
           const p = JSON.parse(process.env.PAYLOAD);
-          const data = p.context?.data || {};
-          const path = p.context?.path || '';
+          const ctx = p.context || {};
+          const path = ctx.path || '';
           const slug = path.replace(/\.md$/, '').split('/').pop();
-          const title = data.title || slug;
-          const desc = data.description || '博客更新';
+
+          // 直接从文件读取 frontmatter
+          let title = slug;
+          let desc = '';
+          try {
+            const content = fs.readFileSync(path, 'utf8');
+            const fm = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
+            if (fm) {
+              const get = (key) => {
+                const m = fm[1].match(new RegExp(`^${key}:\\s*(.+)$`, 'm'));
+                return m ? m[1].replace(/^["']|["']$/g, '').trim() : '';
+              };
+              title = get('title') || slug;
+              desc = get('description') || '';
+            }
+          } catch (e) {
+            // fallback to payload data
+            title = ctx.data?.title || slug;
+            desc = ctx.data?.description || '';
+          }
+
+          const summary = desc || '博客更新';
           const url = `https://feed.2x.nz/posts/${slug}/`;
 
           console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
@@ -36,7 +59,7 @@ jobs:
           console.log(`  描述:  ${desc}`);
           console.log(`  URL:   ${url}\n`);
 
-          const body = JSON.stringify({ title, summary: desc, url });
+          const body = JSON.stringify({ title, summary, url });
 
           async function send(webhook, label) {
             console.log(`  → 发送到 ${label}...`);
