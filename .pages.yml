@@ -17,7 +17,7 @@ content:
     path: content/blog
     filename:
       template: "{primary}.md"
-      field: create
+      field: true
     view:
       fields: [ title, coverImage, draft, date ]
     fields:
