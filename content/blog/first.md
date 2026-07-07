@@ -1,6 +1,7 @@
 ---
 title: 第一篇 PagesCMS 构建的文章
 description: PagesCMS可以代理您操作Github来撰写文章或存储任何内容，然后您可以接入各类网站生成器来上线您的博客/电商/社交网站
+coverImage: /public/img/46cfdaa4c94214224e36faf9118e2c50 - 副本.jpg
 date: 2026-07-04
 draft: false
 pin: false
