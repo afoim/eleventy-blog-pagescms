@@ -25,6 +25,12 @@ jobs:
 
       - run: node generate-posts.js
 
+      - name: Prepare dist directory
+        run: |
+          mkdir -p dist
+          cp -r posts img dist/
+          cp posts.json dist/
+
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
