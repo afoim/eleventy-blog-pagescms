@@ -1,0 +1,7 @@
+# Block sensitive config files
+.pages.yml
+.gitignore
+_headers
+_redirects
+wrangler.jsonc
+.github/*

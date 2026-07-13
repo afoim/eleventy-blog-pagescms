@@ -1,4 +1,4 @@
-media: public/img
+media: img
 
 actions:
   - name: deploy
@@ -6,8 +6,8 @@ actions:
     workflow: deploy.yml
     ref: main
     confirm:
-      title: 部署到 Cloudflare Workers？
-      message: 将构建站点并部署到 Cloudflare Workers。
+      title: 部署到 Cloudflare Pages？
+      message: 将部署站点到 Cloudflare Pages。
       button: Deploy
 
 content:
@@ -24,7 +24,7 @@ content:
           title: 广播此文章？
           message: 将推送通知到 QQ 群和邮件订阅。
           button: 广播
-    path: content/blog
+    path: posts
     filename:
       template: "{primary}.md"
       field: true
@@ -39,21 +39,12 @@ content:
       - { name: pin, label: 置顶, type: boolean }
       - { name: tags, label: Tags, type: string, list: true }
       - { name: body, label: Body, type: rich-text }
-  - name: about
-    label: About page
-    type: file
-    path: content/about/index.md
-    fields:
-      - { name: layout, type: string, hidden: true, default: layouts/base.njk }
-      - name: eleventyNavigation
-        label: Navigation
-        type: object
-        fields:
-          - { name: key, label: 标识, type: string }
-          - { name: order, label: Order, type: number }
-      - { name: body, label: Body, type: rich-text }
-  - name: metadata
-    label: Metadata
-    type: file
-    path: _data/metadata.js
-    format: code
+  # - name: about
+  #   label: About page
+  #   type: file
+  #   path: content/about/index.md
+  # - name: metadata
+  #   label: Metadata
+  #   type: file
+  #   path: _data/metadata.js
+  #   format: code

@@ -1,8 +1,8 @@
 {
-	"name": "acofork-feed",
-	"compatibility_date": "2026-07-01",
-	"assets": {
-		"directory": "_site",
-		"not_found_handling": "404-page"
-	}
+    "name": "acofork-feed",
+    "compatibility_date": "2026-07-01",
+    "assets": {
+        "directory": ".",
+        "not_found_handling": "404-page"
+    }
 }
