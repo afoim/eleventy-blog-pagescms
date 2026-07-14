@@ -1,9 +1,10 @@
 ---
 title: 手把手教你跑一个二次元AI老婆！另附自然语言生图教程！
-date: '2026-04-26'
 description: 极！其！简！单！傻！子！都！会！本期将手把手教你从软件安装，到模型配置再到出图，百分百画出惊艳的图片！
-draft: false
 coverImage: /img/ai-wife-index.png
+date: 2026-04-26
+draft: false
+pin: false
 ---
 # 引言
 
@@ -53,11 +54,12 @@ coverImage: /img/ai-wife-index.png
 点击下载即可
 
 ![](/img/ai-wife-index-1.png)
+
 ### 如果你需要下载LoRA
 
 首先你要知道你想画的角色的英文名，如 **Cartethyia** （鸣潮 - 卡提希娅） 
 
-然后前往 https://civitai.com/ 进行搜索，选择你喜欢的LoRA
+然后前往 [https://civitai.com/](https://civitai.com/) 进行搜索，选择你喜欢的LoRA
 
 ![](/img/ai-wife-ai-wife-1.png)
 
@@ -73,6 +75,7 @@ coverImage: /img/ai-wife-index.png
 > 这里有一个坑点，对于桌面版安装的ComfyUI，请将模型放到你当时安装时选择的文件夹中，如： `C:\Users\af\Documents\ComfyUI` ，而不是形如 `C:\Users\af\AppData\Local\Programs\ComfyUI\resources\ComfyUI` 的地方，更多请参见官方文档： [重要提示：请勿修改 resource/ComfyUI 文件夹 - Windows桌面版 - ComfyUI](https://docs.comfy.org/zh-CN/installation/desktop/windows#%E9%87%8D%E8%A6%81%E6%8F%90%E7%A4%BA%EF%BC%9A%E8%AF%B7%E5%8B%BF%E4%BF%AE%E6%94%B9-resource/comfyui-%E6%96%87%E4%BB%B6%E5%A4%B9)
 
 打开 `models` 目录：
+
 - 将基底模型（类似 `waiIllustriousSDXL_v160.safetensors`）放入 `checkpoints` 文件夹
 - 将LoRA模型放入 `loras` 文件夹
 
@@ -84,9 +87,9 @@ coverImage: /img/ai-wife-index.png
 
 默认打开应该是空空如也，这边提供了一个起手式+LoRA的工作流，你可以直接导入：
 
-[点我下载- 基础起手.json](https://2x.nz/files/基础起手.json)
+[点我下载- 基础起手.json](https://raw-files.2x.nz/基础起手.json)
 
-[点我下载- 基础起手+Lora.json](https://2x.nz/files/基础起手+Lora.json)
+[点我下载- 基础起手+Lora.json](https://raw-files.2x.nz/基础起手+Lora.json)
 
 下载之后，点击左上角的ComfyUI图标，打开这个工作流
 
@@ -144,7 +147,6 @@ WAI模型的一大特色就是支持直接通过Danbooru里已有的角色直接
   ```
   masterpiece, best quality, newest, absurdres, highres
   ```
-
 - **负面条件**：
   ```
   text, watermark, worst quality, old, early, low quality, lowres, signature, username, logo, bad hands, mutated hands, mammal, anthro, furry, ambiguous form, feral, semi-anthro
@@ -162,6 +164,7 @@ WAI模型的一大特色就是支持直接通过Danbooru里已有的角色直接
 这里设置生成图片的分辨率，根据不同模型有不同的推荐分辨率：
 
 **WAI推荐分辨率**（总面积约为 1024x1024）：
+
 - **最推荐：832x1216**
 - 其余：768x1344、896x1152、1024x1024、1152x896、1216x832、1344x768、1024x1536、1536x1024
 
@@ -216,11 +219,9 @@ WAI模型的一大特色就是支持直接通过Danbooru里已有的角色直接
 # 常见问题与技巧
 
 - **AI生成的图片随机性较强**：每一次生成的图片都不太一样，多试试！
-
 - **避免生成涩图**：可以在负面提示词添加 `NSFW`，在正面提示词添加 `safe`
-
 - **参考资源**：更多WAI模型的技巧可以到Civitai模型页面的About查看
-  ![2025-05-13-12-30-55-image.webp](/img/ai-wife-2025-05-13-12-30-55-image.webp)
+![2025-05-13-12-30-55-image.webp](/img/ai-wife-2025-05-13-12-30-55-image.webp)
 
 # 新章：纯中文自然语言生图！
 
@@ -233,7 +234,7 @@ WAI模型的一大特色就是支持直接通过Danbooru里已有的角色直接
 
 当然可以，于是该项目应运而生了！
 
-https://github.com/afoim/natureDrawImage
+[https://github.com/afoim/natureDrawImage](https://github.com/afoim/natureDrawImage)
 
 > 推荐使用 Google AI Studio 里面的High思考级别的Gemma4。它的安全审查并不审查 **思维链** 所以...
 
@@ -256,7 +257,7 @@ https://github.com/afoim/natureDrawImage
 
 # 新版 2x.nz/draw 使用技巧
 
-> 我们构建了一个站点，可以供AI绘图爱好者们免费生图： https://2x.nz/draw
+> 我们构建了一个站点，可以供AI绘图爱好者们免费生图： [https://2x.nz/draw](https://2x.nz/draw)
 
 ### 文生图
 
@@ -289,6 +290,7 @@ DanBooru的角色有非常多，所以在大多数情况下，我们不需要引
 ![](/img/ai-wife-index-6.png)
 
 ![](/img/ai-wife-index-8.png)
+
 #### 自定义绘画
 
 你可以使用 **英文Tag** 来控制图像生成，如在正向提示词添加 `school` ，则最终出图会有 **学校元素** （图例为校服）
@@ -316,6 +318,7 @@ DanBooru的角色有非常多，所以在大多数情况下，我们不需要引
 ![](/img/ai-wife-index-12.png)
 
 ![](/img/ai-wife-index-13.png)
+
 #### 将这些串起来
 
 读到这里，想必你已经完全掌握了文生图的用法。无外乎三件事
