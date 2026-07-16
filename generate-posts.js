@@ -113,8 +113,8 @@ console.log(`✅  Generated posts.json with ${posts.length} posts`);
 // ── RSS 2.0 Feed ───────────────────────────────────────────────────
 const FEED_OUTPUT = join(__dirname, "rss.xml");
 const SITE_URL = "https://feed.2x.nz/";
-const SITE_TITLE = "AcoFork Feed";
-const SITE_DESC = "AcoFork Feed. 一个随时都会冒出新奇想法的神奇小站";
+const SITE_TITLE = "博客 | 二叉树树";
+const SITE_DESC = "《二叉树树》是一个专注于IT/互联网技术分享与实践的个人技术博客，在这里你可以找到众多前沿技术的分享与实践经验。";
 const AUTHOR_NAME = "二叉树树";
 const AUTHOR_EMAIL = "acofork@qq.com";
 

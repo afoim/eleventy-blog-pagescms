@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
-    <title>AcoFork Feed</title>
+    <title>博客 | 二叉树树</title>
     <link>https://feed.2x.nz/</link>
-    <description>AcoFork Feed. 一个随时都会冒出新奇想法的神奇小站</description>
+    <description>《二叉树树》是一个专注于IT/互联网技术分享与实践的个人技术博客，在这里你可以找到众多前沿技术的分享与实践经验。</description>
     <language>zh-CN</language>
     <lastBuildDate>Sat, 04 Jul 2026 00:00:00 GMT</lastBuildDate>
     <generator>generate-posts.js (Eleventy CMS)</generator>
