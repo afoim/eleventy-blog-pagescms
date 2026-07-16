@@ -79,17 +79,6 @@
     "tags": []
   },
   {
-    "slug": "ai-wife",
-    "title": "手把手教你跑一个二次元AI老婆！另附自然语言生图教程！",
-    "description": "极！其！简！单！傻！子！都！会！本期将手把手教你从软件安装，到模型配置再到出图，百分百画出惊艳的图片！",
-    "published": "2026-04-26",
-    "image": "/img/ai-wife-index.png",
-    "pinned": false,
-    "draft": false,
-    "hide": false,
-    "tags": []
-  },
-  {
     "slug": "astro-to-svelte",
     "title": "网站全面升级为纯Svelte！好处都有啥？都踩了哪些坑？",
     "description": "自2024年以来，本站一直使用 Astro/Fuwari 来开发，但从该项目不再是一个纯粹的静态博客站之后，基于Astro的开发也越来越艰难。今天，我们来聊聊这次大更新吧！",
