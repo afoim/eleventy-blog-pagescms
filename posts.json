@@ -35,17 +35,6 @@
     "tags": []
   },
   {
-    "slug": "7days-xiluo",
-    "title": "我与你共度的七日 - 台本",
-    "description": "机密-001",
-    "published": "2026-06-28",
-    "image": "/img/7days-xiluo-index.jpg",
-    "pinned": false,
-    "draft": false,
-    "hide": false,
-    "tags": []
-  },
-  {
     "slug": "move-linux",
     "title": "迁移Linux到新硬盘",
     "description": "从旧硬盘迁移Linux到新硬盘，包括硬盘对拷、UUID修复、GRUB引导重建和fstab更新",
@@ -84,17 +73,6 @@
     "description": "今天手头突然要用一个老的Win7 32位系统来远程开发，自然是无法用UU远程了，然后RDP又给我整这出...",
     "published": "2026-05-22",
     "image": "/img/fuck-mswin11-rdp-fkms.png",
-    "pinned": false,
-    "draft": false,
-    "hide": false,
-    "tags": []
-  },
-  {
-    "slug": "ai-gg",
-    "title": "关于AI生图的最新公告",
-    "description": "",
-    "published": "2026-05-11",
-    "image": null,
     "pinned": false,
     "draft": false,
     "hide": false,

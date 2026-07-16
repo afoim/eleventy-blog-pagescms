@@ -29,7 +29,7 @@ jobs:
         run: |
           mkdir -p dist
           cp -r posts img dist/
-          cp posts.json _headers feed.xml dist/
+          cp posts.json _headers rss.xml dist/
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
