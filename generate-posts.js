@@ -7,6 +7,22 @@ const { join } = require("path");
 
 const POSTS_DIR = join(__dirname, "posts");
 const OUTPUT = join(__dirname, "posts.json");
+const FEED_OUTPUT = join(__dirname, "rss.xml");
+
+const SITE_URL = "https://raw-posts.2x.nz/";
+const SITE_TITLE = "博客 | 二叉树树";
+const SITE_DESC = "《二叉树树》是一个专注于IT/互联网技术分享与实践的个人技术博客，在这里你可以找到众多前沿技术的分享与实践经验。";
+const AUTHOR_NAME = "二叉树树";
+const AUTHOR_EMAIL = "acofork@qq.com";
+
+/** Convert a relative URL to absolute using SITE_URL */
+function absUrl(url) {
+  if (!url) return url;
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  var base = SITE_URL.replace(/\/$/, "");
+  var path = url.startsWith("/") ? url : "/" + url;
+  return base + path;
+}
 
 /** Parse YAML-like frontmatter into a map */
 function parseFrontmatter(fm) {
@@ -69,7 +85,7 @@ for (const file of readdirSync(POSTS_DIR)) {
   // Parse frontmatter
   const match = raw.match(/^---\n([\s\S]*?)\n---\n/);
   if (!match) {
-    console.warn(`⚠️  ${file}: no frontmatter found`);
+    console.warn("⚠️  " + file + ": no frontmatter found");
     continue;
   }
 
@@ -79,7 +95,7 @@ for (const file of readdirSync(POSTS_DIR)) {
   rawPosts.push({ slug, body });
 
   if (!fm.title) {
-    console.warn(`⚠️  ${file}: no title`);
+    console.warn("⚠️  " + file + ": no title");
     continue;
   }
 
@@ -88,7 +104,7 @@ for (const file of readdirSync(POSTS_DIR)) {
     title: fm.title,
     description: fm.description || "",
     published: fm.date || "",
-    image: fm.coverImage || null,
+    image: fm.coverImage ? absUrl(fm.coverImage) : null,
     pinned: fm.pin === true || fm.pin === "true",
     draft: fm.draft === true || fm.draft === "true",
     hide: fm.hide === true || fm.hide === "true",
@@ -108,16 +124,9 @@ posts.sort((a, b) => {
 });
 
 writeFileSync(OUTPUT, JSON.stringify(posts, null, 2), "utf-8");
-console.log(`✅  Generated posts.json with ${posts.length} posts`);
+console.log("Generated posts.json with " + posts.length + " posts");
 
-// ── RSS 2.0 Feed ───────────────────────────────────────────────────
-const FEED_OUTPUT = join(__dirname, "rss.xml");
-const SITE_URL = "https://feed.2x.nz/";
-const SITE_TITLE = "博客 | 二叉树树";
-const SITE_DESC = "《二叉树树》是一个专注于IT/互联网技术分享与实践的个人技术博客，在这里你可以找到众多前沿技术的分享与实践经验。";
-const AUTHOR_NAME = "二叉树树";
-const AUTHOR_EMAIL = "acofork@qq.com";
-
+// ---- RSS 2.0 Feed ----
 function escapeXml(s) {
   return String(s)
     .replace(/&/g, "&amp;")
@@ -144,7 +153,7 @@ const MIME_MAP = {
 };
 
 /**
- * A minimal Markdown → HTML converter for the article body.
+ * A minimal Markdown to HTML converter for the article body.
  * Handles the patterns used in this project's posts:
  *   - Headings (# ## ###)
  *   - Bold (**text**), Italic (*text*)
@@ -158,7 +167,7 @@ const MIME_MAP = {
  *   - Paragraphs (double-newline separated)
  */
 function mdToHtml(md) {
-  let html = md;
+  var html = md;
 
   // Escape raw HTML tags that are not already escaped
   html = html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -166,20 +175,24 @@ function mdToHtml(md) {
   // Horizontal rules
   html = html.replace(/^---$/gm, "<hr />");
 
-  // Code blocks (```lang ... ```) — must come before inline code
-  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) => {
-    const langAttr = lang ? ` class="language-${escapeXml(lang)}"` : "";
-    return `<pre><code${langAttr}>${code.trim()}</code></pre>`;
+  // Code blocks (```lang ... ```) must come before inline code
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, function (_, lang, code) {
+    var langAttr = lang ? ' class="language-' + escapeXml(lang) + '"' : "";
+    return "<pre><code" + langAttr + ">" + code.trim() + "</code></pre>";
   });
 
   // Inline code
   html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
 
-  // Images ![alt](url)
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />');
+  // Links [text](url) must come before images
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (_, text, url) {
+    return '<a href="' + absUrl(url) + '">' + text + "</a>";
+  });
 
-  // Links [text](url)
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  // Images ![alt](url)
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (_, alt, url) {
+    return '<img src="' + absUrl(url) + '" alt="' + alt + '" />';
+  });
 
   // Bold and italic
   html = html.replace(/\*\*\*([^*]+)\*\*\*/g, "<strong><em>$1</em></strong>");
@@ -204,19 +217,19 @@ function mdToHtml(md) {
   html = html.replace(/((?:<li>.*?<\/li>\n?)+)/g, "<ul>$1</ul>");
 
   // Wrap consecutive <blockquote> in a container
-  html = html.replace(/((?:<blockquote>.*?<\/blockquote>\n?)+)/g, (match) => {
+  html = html.replace(/((?:<blockquote>.*?<\/blockquote>\n?)+)/g, function (match) {
     return match.replace(/<\/blockquote>\n?<blockquote>/g, "\n");
   });
 
   // Paragraphs: wrap remaining text blocks not already in block-level tags
-  const blockTags = /^<\/?(?:h[1-6]|ul|ol|li|blockquote|pre|hr|p|div|table)/i;
-  const paragraphs = html.split("\n\n").filter(Boolean);
+  var blockTags = /^<\/?(?:h[1-6]|ul|ol|li|blockquote|pre|hr|p|div|table)/i;
+  var paragraphs = html.split("\n\n").filter(Boolean);
   html = paragraphs
-    .map((p) => {
-      const trimmed = p.trim();
+    .map(function (p) {
+      var trimmed = p.trim();
       if (!trimmed) return "";
       if (blockTags.test(trimmed)) return trimmed;
-      return `<p>${trimmed}</p>`;
+      return "<p>" + trimmed + "</p>";
     })
     .join("\n");
 
@@ -228,81 +241,80 @@ function mdToHtml(md) {
 
 /** Build an RSS 2.0 feed from the visible (non-draft, non-hidden) posts */
 function generateRssFeed(allPosts, allRawPosts) {
-  const visible = allPosts.filter((p) => !p.draft && !p.hide);
-  const lastBuildDate =
+  var visible = allPosts.filter(function (p) { return !p.draft && !p.hide; });
+  var lastBuildDate =
     visible.length > 0 ? toRfc822Date(visible[0].published) : new Date().toUTCString();
 
-  // Build a map of slug → raw Markdown body for quick lookup
-  const bodyMap = {};
-  for (const raw of allRawPosts) {
-    bodyMap[raw.slug] = raw.body;
+  // Build a map of slug to raw Markdown body for quick lookup
+  var bodyMap = {};
+  for (var i = 0; i < allRawPosts.length; i++) {
+    bodyMap[allRawPosts[i].slug] = allRawPosts[i].body;
   }
 
-  const lines = [];
+  var lines = [];
   lines.push('<?xml version="1.0" encoding="utf-8"?>');
   lines.push('<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">');
   lines.push("  <channel>");
-  lines.push(`    <title>${escapeXml(SITE_TITLE)}</title>`);
-  lines.push(`    <link>${escapeXml(SITE_URL)}</link>`);
-  lines.push(`    <description>${escapeXml(SITE_DESC)}</description>`);
-  lines.push(`    <language>zh-CN</language>`);
-  lines.push(`    <lastBuildDate>${lastBuildDate}</lastBuildDate>`);
-  lines.push(`    <generator>generate-posts.js (Eleventy CMS)</generator>`);
-  lines.push(`    <atom:link href="${escapeXml(SITE_URL)}rss.xml" rel="self" type="application/rss+xml"/>`);
-  lines.push(`    <managingEditor>${escapeXml(AUTHOR_EMAIL)} (${escapeXml(AUTHOR_NAME)})</managingEditor>`);
-  lines.push(`    <webMaster>${escapeXml(AUTHOR_EMAIL)} (${escapeXml(AUTHOR_NAME)})</webMaster>`);
+  lines.push("    <title>" + escapeXml(SITE_TITLE) + "</title>");
+  lines.push("    <link>" + escapeXml(SITE_URL) + "</link>");
+  lines.push("    <description>" + escapeXml(SITE_DESC) + "</description>");
+  lines.push("    <language>zh-CN</language>");
+  lines.push("    <lastBuildDate>" + lastBuildDate + "</lastBuildDate>");
+  lines.push("    <generator>generate-posts.js (Eleventy CMS)</generator>");
+  lines.push('    <atom:link href="' + escapeXml(SITE_URL) + 'rss.xml" rel="self" type="application/rss+xml"/>');
+  lines.push("    <managingEditor>" + escapeXml(AUTHOR_EMAIL) + " (" + escapeXml(AUTHOR_NAME) + ")</managingEditor>");
+  lines.push("    <webMaster>" + escapeXml(AUTHOR_EMAIL) + " (" + escapeXml(AUTHOR_NAME) + ")</webMaster>");
 
-  for (const post of visible) {
-    const postUrl = `${SITE_URL}posts/${post.slug}/`;
+  for (var j = 0; j < visible.length; j++) {
+    var post = visible[j];
+    var postUrl = SITE_URL + "posts/" + post.slug + "/";
 
     // Build article HTML from Markdown body
-    const rawBody = bodyMap[post.slug] || "";
-    const contentHtml = mdToHtml(rawBody);
+    var rawBody = bodyMap[post.slug] || "";
+    var contentHtml = mdToHtml(rawBody);
 
     // Full HTML with cover image at top if available
-    let fullContent = "";
+    var fullContent = "";
     if (post.image) {
-      const absUrl = post.image.startsWith("http") ? post.image : `${SITE_URL.replace(/\/$/, "")}${post.image}`;
-      fullContent += `<p><img src="${escapeXml(absUrl)}" alt="${escapeXml(post.title)}" /></p>`;
+      fullContent += '<p><img src="' + absUrl(post.image) + '" alt="' + escapeXml(post.title) + '" /></p>';
     }
     if (post.description) {
-      fullContent += `<p>${escapeXml(post.description)}</p>`;
+      fullContent += "<p>" + escapeXml(post.description) + "</p>";
     }
     fullContent += contentHtml;
 
-    lines.push(`    <item>`);
-    lines.push(`      <title>${escapeXml(post.title)}</title>`);
-    lines.push(`      <link>${escapeXml(postUrl)}</link>`);
-    lines.push(`      <guid isPermaLink="true">${escapeXml(postUrl)}</guid>`);
-    lines.push(`      <pubDate>${toRfc822Date(post.published)}</pubDate>`);
+    lines.push("    <item>");
+    lines.push("      <title>" + escapeXml(post.title) + "</title>");
+    lines.push("      <link>" + escapeXml(postUrl) + "</link>");
+    lines.push('      <guid isPermaLink="true">' + escapeXml(postUrl) + "</guid>");
+    lines.push("      <pubDate>" + toRfc822Date(post.published) + "</pubDate>");
 
     if (post.description) {
-      lines.push(`      <description>${escapeXml(post.description)}</description>`);
+      lines.push("      <description>" + escapeXml(post.description) + "</description>");
     }
 
     // Full article content (CDATA-wrapped for HTML)
-    lines.push(`      <content:encoded><![CDATA[${fullContent}]]></content:encoded>`);
+    lines.push("      <content:encoded><![CDATA[" + fullContent + "]]></content:encoded>");
 
     // Cover image as media:content (for follow.io and other readers)
     if (post.image) {
-      const ext = post.image.toLowerCase().match(/\.\w+$/)?.[0] || "";
-      const mime = MIME_MAP[ext] || "image/jpeg";
-      const absUrl = post.image.startsWith("http") ? post.image : `${SITE_URL.replace(/\/$/, "")}${post.image}`;
-      lines.push(`      <media:content url="${escapeXml(absUrl)}" type="${mime}" medium="image" />`);
-      lines.push(`      <media:thumbnail url="${escapeXml(absUrl)}" />`);
+      var ext = (post.image.toLowerCase().match(/\.\w+$/) || [""])[0];
+      var mime = MIME_MAP[ext] || "image/jpeg";
+      lines.push('      <media:content url="' + absUrl(post.image) + '" type="' + mime + '" medium="image" />');
+      lines.push('      <media:thumbnail url="' + absUrl(post.image) + '" />');
     }
 
     // Categories / tags
     if (Array.isArray(post.tags)) {
-      for (const tag of post.tags) {
-        lines.push(`      <category>${escapeXml(tag)}</category>`);
+      for (var k = 0; k < post.tags.length; k++) {
+        lines.push("      <category>" + escapeXml(post.tags[k]) + "</category>");
       }
     }
     if (post.category) {
-      lines.push(`      <category>${escapeXml(post.category)}</category>`);
+      lines.push("      <category>" + escapeXml(post.category) + "</category>");
     }
 
-    lines.push(`    </item>`);
+    lines.push("    </item>");
   }
 
   lines.push("  </channel>");
@@ -311,4 +323,4 @@ function generateRssFeed(allPosts, allRawPosts) {
 }
 
 writeFileSync(FEED_OUTPUT, generateRssFeed(posts, rawPosts), "utf-8");
-console.log(`✅  Generated rss.xml with ${posts.filter((p) => !p.draft && !p.hide).length} entries (RSS 2.0)`);
+console.log("Generated rss.xml with " + posts.filter(function (p) { return !p.draft && !p.hide; }).length + " entries (RSS 2.0)");
