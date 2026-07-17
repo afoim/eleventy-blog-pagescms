@@ -196,6 +196,7 @@ const MIME_MAP = {
 
 /** Build an RSS 2.0 feed from the visible (non-draft, non-hidden) posts */
 function generateRssFeed(allPosts, allRawPosts) {
+  var RSS_URL = "https://2x.nz/";
   var visible = allPosts.filter(function (p) { return !p.draft && !p.hide; });
   var lastBuildDate =
     visible.length > 0 ? toRfc822Date(visible[0].published) : new Date().toUTCString();
@@ -211,7 +212,7 @@ function generateRssFeed(allPosts, allRawPosts) {
   lines.push('<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">');
   lines.push("  <channel>");
   lines.push("    <title>" + escapeXml(SITE_TITLE) + "</title>");
-  lines.push("    <link>" + escapeXml(SITE_URL) + "</link>");
+  lines.push("    <link>" + escapeXml(RSS_URL) + "</link>");
   lines.push("    <description>" + escapeXml(SITE_DESC) + "</description>");
   lines.push("    <language>zh-CN</language>");
   lines.push("    <lastBuildDate>" + lastBuildDate + "</lastBuildDate>");
@@ -222,7 +223,7 @@ function generateRssFeed(allPosts, allRawPosts) {
 
   for (var j = 0; j < visible.length; j++) {
     var post = visible[j];
-    var postUrl = SITE_URL + "posts/" + post.slug + "/";
+    var postUrl = RSS_URL + "posts/" + post.slug + "/";
 
     // Convert Markdown body to HTML using marked
     var rawBody = bodyMap[post.slug] || "";
