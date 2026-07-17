@@ -23,6 +23,8 @@ jobs:
         with:
           node-version: "22"
 
+      - run: npm ci
+
       - run: node generate-posts.js
 
       - name: Prepare dist directory
