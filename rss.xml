@@ -7,7 +7,7 @@
     <language>zh-CN</language>
     <lastBuildDate>Sat, 04 Jul 2026 00:00:00 GMT</lastBuildDate>
     <generator>generate-posts.js (Eleventy CMS)</generator>
-    <atom:link href="https://raw-posts.2x.nz/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://2x.nz/rss.xml" rel="self" type="application/rss+xml"/>
     <managingEditor>acofork@qq.com (二叉树树)</managingEditor>
     <webMaster>acofork@qq.com (二叉树树)</webMaster>
     <item>

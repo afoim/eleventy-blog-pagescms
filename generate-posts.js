@@ -7,7 +7,8 @@ const { join } = require("path");
 
 const POSTS_DIR = join(__dirname, "posts");
 const OUTPUT = join(__dirname, "posts.json");
-const FEED_OUTPUT = join(__dirname, "rss.xml");
+var FEED_OUTPUT = join(__dirname, "rss.xml");
+var SELF_URL = "https://2x.nz/rss.xml";
 
 const SITE_URL = "https://raw-posts.2x.nz/";
 const SITE_TITLE = "博客 | 二叉树树";
@@ -261,7 +262,7 @@ function generateRssFeed(allPosts, allRawPosts) {
   lines.push("    <language>zh-CN</language>");
   lines.push("    <lastBuildDate>" + lastBuildDate + "</lastBuildDate>");
   lines.push("    <generator>generate-posts.js (Eleventy CMS)</generator>");
-  lines.push('    <atom:link href="' + escapeXml(SITE_URL) + 'rss.xml" rel="self" type="application/rss+xml"/>');
+  lines.push('    <atom:link href="' + escapeXml(SELF_URL) + '" rel="self" type="application/rss+xml"/>');
   lines.push("    <managingEditor>" + escapeXml(AUTHOR_EMAIL) + " (" + escapeXml(AUTHOR_NAME) + ")</managingEditor>");
   lines.push("    <webMaster>" + escapeXml(AUTHOR_EMAIL) + " (" + escapeXml(AUTHOR_NAME) + ")</webMaster>");
 
