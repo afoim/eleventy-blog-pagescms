@@ -127,6 +127,39 @@ posts.sort((a, b) => {
 writeFileSync(OUTPUT, JSON.stringify(posts, null, 2), "utf-8");
 console.log("Generated posts.json with " + posts.length + " posts");
 
+// ---- Rewrite Markdown: convert relative paths to absolute ----
+var POSTS_OUT = join(__dirname, "dist", "posts");
+
+// Ensure dist/ and dist/posts/ exist
+var fs = require("fs");
+fs.mkdirSync(join(__dirname, "dist"), { recursive: true });
+fs.mkdirSync(POSTS_OUT, { recursive: true });
+
+/** Rewrite relative URL references in Markdown body to absolute */
+function rewriteMarkdownPaths(mdBody) {
+  // Replace ALL /img/ references globally (catches Markdown images,
+  // raw HTML <img src>, frontmatter coverImage, etc.)
+  mdBody = mdBody.replace(/\/img\//g, SITE_URL.replace(/\/$/, "") + "/img/");
+  // Replace other /-prefixed relative paths in Markdown links
+  // Links: [text](/path) → [text](https://raw-posts.2x.nz/path)
+  mdBody = mdBody.replace(/(?<!!)\[([^\]]+)\]\((\/[^)]+)\)/g, function (_, text, url) {
+    // Skip if already absolute
+    if (url.indexOf(SITE_URL.replace(/\/$/, "")) >= 0) return _;
+    return "[" + text + "](" + absUrl(url) + ")";
+  });
+  return mdBody;
+}
+
+// Write rewritten .md files to dist/posts/ so the frontend gets absolute URLs
+for (var fi = 0; fi < rawPosts.length; fi++) {
+  var origSlug = rawPosts[fi].slug;
+  var origFile = origSlug + ".md";
+  var src = readFileSync(join(POSTS_DIR, origFile), "utf-8");
+  var rewritten = rewriteMarkdownPaths(src);
+  writeFileSync(join(POSTS_OUT, origFile), rewritten, "utf-8");
+}
+console.log("Rewrote " + rawPosts.length + " Markdown files to dist/posts/ with absolute URLs");
+
 // ---- RSS 2.0 Feed ----
 function escapeXml(s) {
   return String(s)
@@ -325,3 +358,8 @@ function generateRssFeed(allPosts, allRawPosts) {
 
 writeFileSync(FEED_OUTPUT, generateRssFeed(posts, rawPosts), "utf-8");
 console.log("Generated rss.xml with " + posts.filter(function (p) { return !p.draft && !p.hide; }).length + " entries (RSS 2.0)");
+
+// Write into dist/ so deploy.yml only needs to copy img/ and _headers
+writeFileSync(join(__dirname, "dist", "posts.json"), JSON.stringify(posts, null, 2), "utf-8");
+writeFileSync(join(__dirname, "dist", "rss.xml"), readFileSync(FEED_OUTPUT, "utf-8"), "utf-8");
+console.log("Copied posts.json and rss.xml into dist/");
