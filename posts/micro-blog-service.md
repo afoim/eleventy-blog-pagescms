@@ -9,6 +9,10 @@ pin: false
 tags:
   - 技术
 ---
+# 视频
+
+> 但不如这篇文章： [https://www.bilibili.com/video/BV1kVNZ67EUz/](https://www.bilibili.com/video/BV1kVNZ67EUz/)
+
 # 引言
 
 众所周知，几乎所有人做网站都是从博客开始做起的。那么在博客写到令人厌烦之后，我们肯定需要为网站拓展一些其他功能，比如一些在线小工具或者其他增值服务。
