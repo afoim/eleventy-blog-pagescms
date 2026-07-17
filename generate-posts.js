@@ -2,8 +2,9 @@
  * 从 posts/*.md 中提取 frontmatter，生成 posts.json
  * 供 svaf-next 获取文章列表
  */
-const { readdirSync, readFileSync, writeFileSync } = require("fs");
+const { readdirSync, readFileSync, writeFileSync, mkdirSync } = require("fs");
 const { join } = require("path");
+const { marked } = require("marked");
 
 const POSTS_DIR = join(__dirname, "posts");
 const OUTPUT = join(__dirname, "posts.json");
@@ -24,6 +25,19 @@ function absUrl(url) {
   var path = url.startsWith("/") ? url : "/" + url;
   return base + path;
 }
+
+// --- Configure marked to use absUrl for images and links ---
+var renderer = new marked.Renderer();
+renderer.image = function (tok) {
+  var href = tok.href ? absUrl(tok.href) : "";
+  var alt = tok.text || "";
+  return '<img src="' + href + '" alt="' + alt.replace(/"/g, "&quot;") + '" />';
+};
+renderer.link = function (tok) {
+  var href = tok.href ? absUrl(tok.href) : "";
+  return '<a href="' + href + '">' + tok.text + "</a>";
+};
+marked.setOptions({ renderer: renderer, breaks: false, gfm: true });
 
 /** Parse YAML-like frontmatter into a map */
 function parseFrontmatter(fm) {
@@ -131,19 +145,13 @@ console.log("Generated posts.json with " + posts.length + " posts");
 var POSTS_OUT = join(__dirname, "dist", "posts");
 
 // Ensure dist/ and dist/posts/ exist
-var fs = require("fs");
-fs.mkdirSync(join(__dirname, "dist"), { recursive: true });
-fs.mkdirSync(POSTS_OUT, { recursive: true });
+mkdirSync(join(__dirname, "dist"), { recursive: true });
+mkdirSync(POSTS_OUT, { recursive: true });
 
 /** Rewrite relative URL references in Markdown body to absolute */
 function rewriteMarkdownPaths(mdBody) {
-  // Replace ALL /img/ references globally (catches Markdown images,
-  // raw HTML <img src>, frontmatter coverImage, etc.)
   mdBody = mdBody.replace(/\/img\//g, SITE_URL.replace(/\/$/, "") + "/img/");
-  // Replace other /-prefixed relative paths in Markdown links
-  // Links: [text](/path) → [text](https://raw-posts.2x.nz/path)
   mdBody = mdBody.replace(/(?<!!)\[([^\]]+)\]\((\/[^)]+)\)/g, function (_, text, url) {
-    // Skip if already absolute
     if (url.indexOf(SITE_URL.replace(/\/$/, "")) >= 0) return _;
     return "[" + text + "](" + absUrl(url) + ")";
   });
@@ -186,93 +194,6 @@ const MIME_MAP = {
   ".bmp": "image/bmp",
 };
 
-/**
- * A minimal Markdown to HTML converter for the article body.
- * Handles the patterns used in this project's posts:
- *   - Headings (# ## ###)
- *   - Bold (**text**), Italic (*text*)
- *   - Inline code (`code`)
- *   - Code blocks (```...```)
- *   - Images (![alt](url))
- *   - Links ([text](url))
- *   - Unordered lists (- item)
- *   - Blockquotes (> text)
- *   - Horizontal rules (---)
- *   - Paragraphs (double-newline separated)
- */
-function mdToHtml(md) {
-  var html = md;
-
-  // Escape raw HTML tags that are not already escaped
-  html = html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-  // Horizontal rules
-  html = html.replace(/^---$/gm, "<hr />");
-
-  // Code blocks (```lang ... ```) must come before inline code
-  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, function (_, lang, code) {
-    var langAttr = lang ? ' class="language-' + escapeXml(lang) + '"' : "";
-    return "<pre><code" + langAttr + ">" + code.trim() + "</code></pre>";
-  });
-
-  // Inline code
-  html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
-
-  // Links [text](url) must come before images
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (_, text, url) {
-    return '<a href="' + absUrl(url) + '">' + text + "</a>";
-  });
-
-  // Images ![alt](url)
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, function (_, alt, url) {
-    return '<img src="' + absUrl(url) + '" alt="' + alt + '" />';
-  });
-
-  // Bold and italic
-  html = html.replace(/\*\*\*([^*]+)\*\*\*/g, "<strong><em>$1</em></strong>");
-  html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-  html = html.replace(/\*([^*]+)\*/g, "<em>$1</em>");
-
-  // Blockquotes
-  html = html.replace(/^&gt;\s*(.*)$/gm, "<blockquote>$1</blockquote>");
-
-  // Unordered lists
-  html = html.replace(/^- (.+)$/gm, "<li>$1</li>");
-
-  // Headings
-  html = html.replace(/^###### (.+)$/gm, "<h6>$1</h6>");
-  html = html.replace(/^##### (.+)$/gm, "<h5>$1</h5>");
-  html = html.replace(/^#### (.+)$/gm, "<h4>$1</h4>");
-  html = html.replace(/^### (.+)$/gm, "<h3>$1</h3>");
-  html = html.replace(/^## (.+)$/gm, "<h2>$1</h2>");
-  html = html.replace(/^# (.+)$/gm, "<h1>$1</h1>");
-
-  // Wrap consecutive <li> in <ul>
-  html = html.replace(/((?:<li>.*?<\/li>\n?)+)/g, "<ul>$1</ul>");
-
-  // Wrap consecutive <blockquote> in a container
-  html = html.replace(/((?:<blockquote>.*?<\/blockquote>\n?)+)/g, function (match) {
-    return match.replace(/<\/blockquote>\n?<blockquote>/g, "\n");
-  });
-
-  // Paragraphs: wrap remaining text blocks not already in block-level tags
-  var blockTags = /^<\/?(?:h[1-6]|ul|ol|li|blockquote|pre|hr|p|div|table)/i;
-  var paragraphs = html.split("\n\n").filter(Boolean);
-  html = paragraphs
-    .map(function (p) {
-      var trimmed = p.trim();
-      if (!trimmed) return "";
-      if (blockTags.test(trimmed)) return trimmed;
-      return "<p>" + trimmed + "</p>";
-    })
-    .join("\n");
-
-  // Clean up empty paragraphs
-  html = html.replace(/<p>\s*<\/p>/g, "");
-
-  return html;
-}
-
 /** Build an RSS 2.0 feed from the visible (non-draft, non-hidden) posts */
 function generateRssFeed(allPosts, allRawPosts) {
   var visible = allPosts.filter(function (p) { return !p.draft && !p.hide; });
@@ -303,9 +224,9 @@ function generateRssFeed(allPosts, allRawPosts) {
     var post = visible[j];
     var postUrl = SITE_URL + "posts/" + post.slug + "/";
 
-    // Build article HTML from Markdown body
+    // Convert Markdown body to HTML using marked
     var rawBody = bodyMap[post.slug] || "";
-    var contentHtml = mdToHtml(rawBody);
+    var contentHtml = marked.parse(rawBody);
 
     // Full HTML with cover image at top if available
     var fullContent = "";
