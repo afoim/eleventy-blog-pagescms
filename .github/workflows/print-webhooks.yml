@@ -1,0 +1,10 @@
+name: Print Webhook URLs
+
+on: workflow_dispatch
+
+jobs:
+  print:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "ANNOUNCE_WEBHOOK_URL=${{ secrets.ANNOUNCE_WEBHOOK_URL }}"
+      - run: echo "FORUM_WEBHOOK_URL=${{ secrets.FORUM_WEBHOOK_URL }}"
