@@ -6,5 +6,9 @@ jobs:
   print:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "ANNOUNCE_WEBHOOK_URL=${{ secrets.ANNOUNCE_WEBHOOK_URL }}"
-      - run: echo "FORUM_WEBHOOK_URL=${{ secrets.FORUM_WEBHOOK_URL }}"
+      - run: echo "ANNOUNCE_WEBHOOK_URL=${{ secrets.ANNOUNCE_WEBHOOK_URL }}" > webhooks.txt
+      - run: echo "FORUM_WEBHOOK_URL=${{ secrets.FORUM_WEBHOOK_URL }}" >> webhooks.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: webhooks
+          path: webhooks.txt
