@@ -94,7 +94,9 @@ const rawPosts = [];
 for (const file of readdirSync(POSTS_DIR)) {
   if (!file.endsWith(".md") && !file.endsWith(".markdown")) continue;
 
-  const raw = readFileSync(join(POSTS_DIR, file), "utf-8");
+  // 归一化 CRLF → LF，使前言解析在 Windows（本地）与 Linux（CI）行为一致，
+  // 否则 CRLF 文件的 `---\r\n` 会让 `^---\n` 正则失配、整篇文章被丢弃。
+  const raw = readFileSync(join(POSTS_DIR, file), "utf-8").replace(/\r\n/g, "\n");
   const slug = file.replace(/\.(md|markdown)$/, "");
 
   // Parse frontmatter
@@ -138,8 +140,43 @@ posts.sort((a, b) => {
   return 0;
 });
 
-writeFileSync(OUTPUT, JSON.stringify(posts, null, 2), "utf-8");
-console.log("Generated posts.json with " + posts.length + " posts");
+// ---- Paginated index + page files ----
+// posts.json 从「全量数组」升级为「索引对象」：{ generatedAt, perPage, total, pageCount, posts }。
+// posts 为可见文章（已过滤 draft/hide），排序为置顶优先、再按日期倒序——
+// 使前端可直接按页渲染 posts-{n}.json，page 0 即置顶 + 最新。
+// 索引仍携带每篇完整元数据，供搜索/上下篇/sitemap/边缘 meta 读取 .posts；
+// 各 posts-{n}.json 为该顺序下每 30 篇一片，供列表页按需拉取。
+var PER_PAGE = 30;
+var visibleSorted = posts
+  .filter(function (p) { return !p.draft && !p.hide; })
+  .sort(function (a, b) {
+    if (a.pinned && !b.pinned) return -1;
+    if (!a.pinned && b.pinned) return 1;
+    if (a.published && b.published) return b.published.localeCompare(a.published);
+    if (a.published) return -1;
+    if (b.published) return 1;
+    return 0;
+  });
+var total = visibleSorted.length;
+var pageCount = Math.max(1, Math.ceil(total / PER_PAGE));
+var generatedAt = new Date().toISOString();
+
+writeFileSync(
+  OUTPUT,
+  JSON.stringify({ generatedAt: generatedAt, perPage: PER_PAGE, total: total, pageCount: pageCount, posts: visibleSorted }, null, 2),
+  "utf-8"
+);
+console.log("Rewrote posts.json as paginated index: " + total + " visible posts, " + pageCount + " pages");
+
+for (var pg = 0; pg < pageCount; pg++) {
+  var slice = visibleSorted.slice(pg * PER_PAGE, (pg + 1) * PER_PAGE);
+  writeFileSync(
+    join(__dirname, "posts-" + pg + ".json"),
+    JSON.stringify({ page: pg, perPage: PER_PAGE, total: total, pageCount: pageCount, posts: slice }, null, 2),
+    "utf-8"
+  );
+}
+console.log("Generated " + pageCount + " page files (posts-0.json .. posts-" + (pageCount - 1) + ".json)");
 
 // ---- Rewrite Markdown: convert relative paths to absolute ----
 var POSTS_OUT = join(__dirname, "dist", "posts");
@@ -281,7 +318,20 @@ function generateRssFeed(allPosts, allRawPosts) {
 writeFileSync(FEED_OUTPUT, generateRssFeed(posts, rawPosts), "utf-8");
 console.log("Generated rss.xml with " + posts.filter(function (p) { return !p.draft && !p.hide; }).length + " entries (RSS 2.0)");
 
-// Write into dist/ so deploy.yml only needs to copy img/ and _headers
-writeFileSync(join(__dirname, "dist", "posts.json"), JSON.stringify(posts, null, 2), "utf-8");
+// Write into dist/ so deploy.yml only needs to copy img/ and _headers.
+// posts.json（索引对象）与所有 posts-{n}.json 分页文件一并进入 dist。
+writeFileSync(
+  join(__dirname, "dist", "posts.json"),
+  JSON.stringify({ generatedAt: generatedAt, perPage: PER_PAGE, total: total, pageCount: pageCount, posts: visibleSorted }, null, 2),
+  "utf-8"
+);
+for (var dpg = 0; dpg < pageCount; dpg++) {
+  var dslice = visibleSorted.slice(dpg * PER_PAGE, (dpg + 1) * PER_PAGE);
+  writeFileSync(
+    join(__dirname, "dist", "posts-" + dpg + ".json"),
+    JSON.stringify({ page: dpg, perPage: PER_PAGE, total: total, pageCount: pageCount, posts: dslice }, null, 2),
+    "utf-8"
+  );
+}
 writeFileSync(join(__dirname, "dist", "rss.xml"), readFileSync(FEED_OUTPUT, "utf-8"), "utf-8");
-console.log("Copied posts.json and rss.xml into dist/");
+console.log("Copied posts.json + " + pageCount + " page files + rss.xml into dist/");
