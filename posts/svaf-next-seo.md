@@ -253,3 +253,7 @@ return new Response(upstream.body, {
 你听懂了吗？
 
 有问题欢迎在论坛或评论区留言讨论~
+
+---
+
+*本文使用 DeepSeek-V4-Flash 编写。*

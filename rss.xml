@@ -220,6 +220,8 @@ return new Response(upstream.body, {
 <p>但总的来说，这套方案在 &quot;纯前端 SPA&quot; 和 &quot;搜索引擎友好&quot; 之间找到了一个不错的平衡点。对于个人网站和小型社区来说，已经绰绰有余了。</p>
 <p>你听懂了吗？</p>
 <p>有问题欢迎在论坛或评论区留言讨论~</p>
+<hr>
+<p><em>本文使用 DeepSeek-V4-Flash 编写。</em></p>
 ]]></content:encoded>
       <media:content url="https://raw-posts.2x.nz/img/cover.png" type="image/png" medium="image" />
       <media:thumbnail url="https://raw-posts.2x.nz/img/cover.png" />
