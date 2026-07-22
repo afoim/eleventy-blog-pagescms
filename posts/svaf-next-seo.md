@@ -10,6 +10,8 @@ tags:
   - 技术
 ---
 
+> [!CAUTION] 本文使用 DeepSeek-V4-Flash 编写。
+
 # 引言
 
 众所周知，现在是个做网站的都要把前后端分离一下。我赶了一趟晚集，在 2026 年的时候也把网站从 Next.js 迁移到了 Vite + React Router 7 的纯 SPA（单页应用）。
@@ -254,6 +256,3 @@ return new Response(upstream.body, {
 
 有问题欢迎在论坛或评论区留言讨论~
 
----
-
-*本文使用 DeepSeek-V4-Flash 编写。*
