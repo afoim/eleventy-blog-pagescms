@@ -216,7 +216,7 @@ return new Response(upstream.body, {
 </ul>
 <p>当然也有一些代价和取舍：</p>
 <ul>
-<li>如果博客文章非常多（上万篇），<code>posts.json</code> 全量索引会变得很大，需要考虑进一步分片</li>
+<li><code>posts.json</code> 携带所有文章元数据供搜索与边缘预读，但列表翻页实际走的是 <code>posts-{n}.json</code> 分片（每片 30 篇），不依赖全量索引的大小</li>
 <li>Worker 的 <code>HTMLRewriter</code> 有 512 个 handler 的上限，好在静态页面的 meta 标签数量固定，不受内容规模影响</li>
 <li>博客正文的预渲染只在边缘做，如果文章渲染失败，爬虫看到的还是空壳——所以要有优雅的降级策略</li>
 </ul>
